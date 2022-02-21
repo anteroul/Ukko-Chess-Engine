@@ -2,9 +2,16 @@
 
 currentGameState Global::state = GAME_ON;
 
-void Global::ghost(Piece* piece)
+void Global::ghost(Piece* p)
 {
-	Piece* p = Sqr::squareHelper(piece->x, piece->y)->piece;
+	p->type = NONE;
+	p->color = UNDEFINED;
+	p->user = GHOST;
+}
+
+void Global::ghostXY(int x, int y)
+{
+	Piece* p = Sqr::squareHelper(x, y)->piece;
 	p->type = NONE;
 	p->color = UNDEFINED;
 	p->user = GHOST;

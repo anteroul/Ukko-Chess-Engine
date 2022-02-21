@@ -38,6 +38,7 @@ class Global
 		static bool engineInCheck;
 
 		static void ghost(Piece* piece);
+		static void ghostXY(int x, int y);
 };
 
 #endif

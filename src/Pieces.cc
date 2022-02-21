@@ -1,9 +1,10 @@
 #include "Pieces.hh"
+#include <iostream>
 
 namespace Pieces
 {
 	// the pieces
-	static Piece p[32];
+	static Piece p[64];
 
 	Piece& get(int n) { return p[n]; }
 
@@ -11,7 +12,7 @@ namespace Pieces
 
 	void set(Piece piece, int x, int y)
 	{
-		for(int i = 0; i < 32; i++)
+		for(int i = 0; i < 64; i++)
 		{
 			if(get(i).x == x && get(i).y == y)
 			{
@@ -25,7 +26,7 @@ namespace Pieces
 
 	Piece& getReal(Piece* piece)
 	{
-		for(int i = 0; i < 32; i++)
+		for(int i = 0; i < 64; i++)
 			if(p[i].x == piece->x && p[i].y == piece->y
 			&& p[i].user == piece->user && p[i].type == piece->type)
 				return p[i];
@@ -98,9 +99,15 @@ namespace Pieces
 		Sqr::getSquare(3, 7).piece = &p[30];
 		Sqr::getSquare(4, 7).piece = &p[31];
 
-		// initialize empty squares as empty
-		for (int y = 2; y < 6; y++)
-			for (int x = 0; x < 8; x++)
-				Global::ghost(Sqr::getSquare(x, y).piece);
+		int c = 32;
+		for(int y = 2; y < 6; y++)
+		{
+			for(int x = 0; x < 8; x++)
+			{
+				p[c] = { NONE, UNDEFINED, x, y, GHOST };
+				Sqr::getSquare(x, y).piece = &p[c];
+				c++;
+			}
+		}
 	}
 }

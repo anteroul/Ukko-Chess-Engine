@@ -95,8 +95,10 @@ namespace LegalMove
 		if(player)
 		{
 			if(p.y == 6)
+			{
 				if(Sqr::squareHelper(p.x, 4)->piece->type == NONE && Sqr::squareHelper(p.x, 5)->piece->type == NONE)
 					sqrs.push_back(*Sqr::squareHelper(p.x, 4));
+			}
 		}
 		else
 		{
