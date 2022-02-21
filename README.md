@@ -11,5 +11,4 @@
 - Proper defeat when player loses.
 
 #### Known issues:
-- Occasional SIGSEGV crashes.
-- Game does not end when player is in checkmate.
+- Shit's fucked up.
