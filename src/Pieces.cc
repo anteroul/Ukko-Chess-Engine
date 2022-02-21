@@ -1,5 +1,4 @@
 #include "Pieces.hh"
-#include <iostream>
 
 namespace Pieces
 {
@@ -99,15 +98,13 @@ namespace Pieces
 		Sqr::getSquare(3, 7).piece = &p[30];
 		Sqr::getSquare(4, 7).piece = &p[31];
 
-		int c = 32;
-		for(int y = 2; y < 6; y++)
+		int a = 2, b = 0;
+		for(int i = 32; i < 64; i++)
 		{
-			for(int x = 0; x < 8; x++)
-			{
-				p[c] = { NONE, UNDEFINED, x, y, GHOST };
-				Sqr::getSquare(x, y).piece = &p[c];
-				c++;
-			}
+			(a < 6) ? a++ : a = 2;
+			(b < 8) ? b++ : b = 0;
+			p[i] = { NONE, UNDEFINED, a, b, GHOST };
+			Sqr::getSquare(a, b).piece = &p[i];
 		}
 	}
 }

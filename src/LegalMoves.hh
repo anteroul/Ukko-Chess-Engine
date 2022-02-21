@@ -18,6 +18,8 @@ namespace LegalMove
 
 	// get filtered version
 	std::vector<Square> getLegal(Piece piece);
+
+	std::vector<Square> getLegalPtr(Piece* piece);
 }
 
 #endif

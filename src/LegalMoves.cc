@@ -183,6 +183,11 @@ namespace LegalMove
 		return false;
 	}
 
+	std::vector<Square> getLegalPtr(Piece* piece)
+	{
+		return getLegal(*piece);
+	}
+
 
 	// get legal moves
 	std::vector<Square> getLegal(Piece piece)
