@@ -19,6 +19,7 @@ Game::Game()
 	
 	// white starts game
 	Settings::PlayerColor == WHITE ? Global::playerTurn = true : Global::playerTurn = false;
+
 }
 
 Game::~Game()
@@ -39,7 +40,7 @@ void Game::eventHandler()
 {
 	while (SDL_PollEvent(&e))
 	{
-		// rezise window
+		// resize window
 		window->resize(e);
 
 		// close application
@@ -64,7 +65,7 @@ void Game::eventHandler()
 			if (selectedSquare->piece->type != NONE && selectedSquare->piece->user == PLAYER)
 			{
 				originalSquare = selectedSquare;
-				legalMoves = LegalMove::getLegal(originalSquare->piece);
+				legalMoves = LegalMove::getLegal(*originalSquare->piece);
 				isPieceSelected = true;
 			}
 		}
@@ -134,37 +135,11 @@ void Game::render()
 	Renderer::render();
 }
 
-bool Game::moveSetup()
-{
-	playerPieces.clear();
-	playerMoves.clear();
-
-	// "raw pieces"
-	for(int i = 16; i < 32; i++)
-		playerPieces.push_back(Pieces::get(i));
-
-	// loop all pieces
-	for(auto& i : playerPieces)
-	{
-		// filter pieces
-		if(i.type != 6 && i.user == PLAYER)
-		{
-			// get all legal moves
-			std::vector<Square> temp = LegalMove::getLegal(&i);
-
-			for(auto& j : temp)
-				playerMoves.push_back(j);
-		}
-	}
-
-	return !playerMoves.empty();
-}
-
 void Game::playerPlayMove()
 {
 	GameManager::update();
 
-	if(!moveSetup())
+	if(!isPieceSelected)
 	{
 		if(Global::playerInCheck)
 			Global::state = DEFEAT;
@@ -174,7 +149,7 @@ void Game::playerPlayMove()
 	else
 	{
 		// if selected new square
-		if (selectedSquare != originalSquare && isPieceSelected)
+		if (selectedSquare != originalSquare)
 		{
 			// loop legal moves for the selected piece
 			for (auto& i : legalMoves)
@@ -184,7 +159,6 @@ void Game::playerPlayMove()
 	}
 }
 
-//TODO rewrite this with new function from Pieces
 void Game::executePlayerMove(Square& sq)
 {
 	// loop players pieces to find the correct one

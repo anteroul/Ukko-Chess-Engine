@@ -5,7 +5,7 @@
 #include "Square.hh"
 #include "SquareManager.hh"
 
-#define ARRSIZE(arr) (int)(sizeof(arr)/sizeof(arr[0]))
+#define ARRSIZE(arr) (int)(sizeof(arr)/sizeof((arr)[0]))
 
 typedef enum { GAME_ON, VICTORY, DEFEAT, DRAW, END } currentGameState;
 

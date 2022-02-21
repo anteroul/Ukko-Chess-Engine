@@ -161,10 +161,10 @@ namespace LegalMove
 
 				if(!v.empty())
 				{
-					for(auto j = v.begin(); j < v.end(); j++)
+					for(auto k = v.begin(); k < v.end(); k++)
 					{
 						// if king is in check
-						if(j->piece->type == KING)
+						if(k->piece->type == KING)
 						{
 							// back to normal
 							Sqr::getSquare(square->x, square->y).piece = square->piece;
@@ -183,12 +183,12 @@ namespace LegalMove
 	}
 
 	// get legal moves
-	std::vector<Square> getLegal(Piece* piece)
+	std::vector<Square> getLegal(Piece& piece)
 	{ 
 		// get raw moves for the piece
-		std::vector<Square> v = LegalMove::get(piece);
+		std::vector<Square> v = LegalMove::get(&piece);
 
-		if(piece->type != KING)
+		if(piece.type != KING)
 		{
 			// loop all the possible moves 
 			for(auto i = v.begin(); i != v.end(); i++) 
@@ -200,20 +200,20 @@ namespace LegalMove
 				Piece* move = Sqr::getSquare(i->x, i->y).piece;
 
 				// set the fake move
-				Sqr::getSquare(i->x, i->y).piece = piece;
+				Sqr::getSquare(i->x, i->y).piece = &piece;
 
-				// set pieces's square to empty
-				Global::ghost(piece);
+				// set piece's square to empty
+				Global::ghost(&piece);
 
 				// getting the opponent's pieces
-				int a = piece->user == PLAYER ? 0 : 16;
-				int b = piece->user == PLAYER ? 16 : 32;
+				int a = piece.user == PLAYER ? 0 : 16;
+				int b = piece.user == PLAYER ? 16 : 32;
 
 				// loop all opponent's pieces
 				for(int j = a; j < b; j++)
 				{
 					// if piece isn't captured in opponents move
-					if(Sqr::getSquare(Pieces::get(j).x, Pieces::get(j).y).piece->user != piece->user)
+					if(Sqr::getSquare(Pieces::get(j).x, Pieces::get(j).y).piece->user != piece.user)
 					{
 						// get all raw legal moves for the opponent's pieces
 						std::vector<Square> temp = LegalMove::get(&Pieces::get(j));
@@ -228,7 +228,7 @@ namespace LegalMove
 								if (!temp.empty())
 								{
 									Sqr::getSquare(i->x, i->y).piece = move;
-									Sqr::getSquare(piece->x, piece->y).piece = piece;
+									Sqr::getSquare(piece.x, piece.y).piece = &piece;
 									backToNormal = true;
 								}
 
@@ -243,7 +243,7 @@ namespace LegalMove
 				if(!backToNormal)
 				{
 					Sqr::getSquare(i->x, i->y).piece = move;
-					Sqr::getSquare(piece->x, piece->y).piece = piece;
+					Sqr::getSquare(piece.x, piece.y).piece = &piece;
 				}
 			}
 		}
@@ -252,7 +252,7 @@ namespace LegalMove
 		{
 			// remove illegal moves for a king
 			for(auto i = v.begin(); i != v.end(); i++)
-				if(kingInDanger(Sqr::squareHelper(i->x, i->y), piece))
+				if(kingInDanger(Sqr::squareHelper(i->x, i->y), &piece))
 					v.erase(i--);
 		}
 		

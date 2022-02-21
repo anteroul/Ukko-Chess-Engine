@@ -1,7 +1,7 @@
 # Ukko Chess Engine v1.1 alpha
 
 #### Changes:
-- More agressive AI.
+- More aggressive AI.
 - Most major bugs fixed including "ghost pieces".
 
 #### TODO:
