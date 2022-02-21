@@ -2,9 +2,12 @@
 
 currentGameState Global::state = GAME_ON;
 
-Piece ghost(int x, int y)
+void Global::ghost(Piece* piece)
 {
-	return { NONE, UNDEFINED, x, y, GHOST };
+	Piece* p = Sqr::squareHelper(piece->x, piece->y)->piece;
+	p->type = NONE;
+	p->color = UNDEFINED;
+	p->user = GHOST;
 }
 
 bool Global::playerTurn = true;

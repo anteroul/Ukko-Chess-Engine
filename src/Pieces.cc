@@ -49,14 +49,14 @@ namespace Pieces
 		for(int i = 0; i < 8; i++)
 		{
 			p[i] = { PAWN, engineColor, i, 1, ENGINE };
-			Sqr::getSquare(i, 1).piece = p[i];
+			Sqr::getSquare(i, 1).piece = &p[i];
 		}
 
 		// player pawns
 		for(int i = 16; i < 24; i++)
 		{
 			p[i] = { PAWN, PlayerColor, (i - 16), 6, PLAYER };
-			Sqr::getSquare((i - 16), 6).piece = p[i];
+			Sqr::getSquare((i - 16), 6).piece = &p[i];
 		}
 
 		// engine pieces
@@ -81,26 +81,26 @@ namespace Pieces
 
 
 		// update squares
-		Sqr::getSquare(0, 0).piece = p[8];
-		Sqr::getSquare(7, 0).piece = p[9];
-		Sqr::getSquare(1, 0).piece = p[10];
-		Sqr::getSquare(6, 0).piece = p[11];
-		Sqr::getSquare(2, 0).piece = p[12];
-		Sqr::getSquare(5, 0).piece = p[13];
-		Sqr::getSquare(3, 0).piece = p[14];
-		Sqr::getSquare(4, 0).piece = p[15];
-		Sqr::getSquare(0, 7).piece = p[24];
-		Sqr::getSquare(7, 7).piece = p[25];
-		Sqr::getSquare(1, 7).piece = p[26];
-		Sqr::getSquare(6, 7).piece = p[27];
-		Sqr::getSquare(2, 7).piece = p[28];
-		Sqr::getSquare(5, 7).piece = p[29];
-		Sqr::getSquare(3, 7).piece = p[30];
-		Sqr::getSquare(4, 7).piece = p[31];
+		Sqr::getSquare(0, 0).piece = &p[8];
+		Sqr::getSquare(7, 0).piece = &p[9];
+		Sqr::getSquare(1, 0).piece = &p[10];
+		Sqr::getSquare(6, 0).piece = &p[11];
+		Sqr::getSquare(2, 0).piece = &p[12];
+		Sqr::getSquare(5, 0).piece = &p[13];
+		Sqr::getSquare(3, 0).piece = &p[14];
+		Sqr::getSquare(4, 0).piece = &p[15];
+		Sqr::getSquare(0, 7).piece = &p[24];
+		Sqr::getSquare(7, 7).piece = &p[25];
+		Sqr::getSquare(1, 7).piece = &p[26];
+		Sqr::getSquare(6, 7).piece = &p[27];
+		Sqr::getSquare(2, 7).piece = &p[28];
+		Sqr::getSquare(5, 7).piece = &p[29];
+		Sqr::getSquare(3, 7).piece = &p[30];
+		Sqr::getSquare(4, 7).piece = &p[31];
 
 		// initialize empty squares as empty
 		for (int y = 2; y < 6; y++)
 			for (int x = 0; x < 8; x++)
-				Sqr::getSquare(x, y).piece = ghost(x, y);
+				Global::ghost(Sqr::getSquare(x, y).piece);
 	}
 }

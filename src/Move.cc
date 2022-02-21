@@ -57,8 +57,8 @@ namespace Move
 		}
 
 		// update board
-		Sqr::squareHelper(rook.x, rook.y)->piece = rook;
-		Sqr::squareHelper(source->x, source->y)->piece = *source;
+		Sqr::squareHelper(rook.x, rook.y)->piece = &rook;
+		Sqr::squareHelper(source->x, source->y)->piece = source;
 	}
 
 	void readName() { std::cout << name << "\n"; }
@@ -275,7 +275,7 @@ namespace Move
 		// REGULAR MOVE
 		
 		// capturing piece
-		if(target.piece.type != 6)
+		if(target.piece->type != 6)
 		{
 			for(int i = 0; i < 32; i++)
 			{
@@ -296,7 +296,7 @@ namespace Move
 		source->y = target.y;
 
 		// update square
-		Sqr::squareHelper(source->x, source->y)->piece = *source;
+		Sqr::squareHelper(source->x, source->y)->piece = source;
 	
 		// make the notation
 		name = name + nameSource + " to " + nameX + nameY + promotion;

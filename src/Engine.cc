@@ -177,10 +177,10 @@ double Engine::materialValue(bool player)
 	{
 		for(int j = 0; j < 8; j++)
 		{
-			if(player && Sqr::getSquare(i, j).piece.user == PLAYER)
+			if(player && Sqr::getSquare(i, j).piece->user == PLAYER)
 				n += getValue(Sqr::getSquare(i, j));
 
-			if((!player) && Sqr::getSquare(i, j).piece.user == ENGINE)
+			if((!player) && Sqr::getSquare(i, j).piece->user == ENGINE)
 				n += getValue(Sqr::getSquare(i, j));
 		}
 	}
@@ -191,7 +191,7 @@ double Engine::materialValue(bool player)
 double Engine::getValue(Square square)
 {
 	double n = 0;
-	switch(square.piece.type)
+	switch(square.piece->type)
 	{
 		case KING: n += 1000; break; // might not be final
 		case NONE: break;
@@ -207,10 +207,10 @@ double Engine::getValue(Square square)
 void Engine::makeFakeMove(std::pair<Piece*, Square>* move)
 {
 	// get the target piece
-	target = &Sqr::squareHelper(move->second.x, move->second.y)->piece;
+	target = Sqr::squareHelper(move->second.x, move->second.y)->piece;
 
 	// source goes to target
-	Sqr::squareHelper(move->second.x, move->second.y)->piece = *move->first;
+	Sqr::squareHelper(move->second.x, move->second.y)->piece = move->first;
 
 	// source is set to zero
 	Sqr::squareHelper(move->first->x, move->first->y)->piece = ghost(move->first->x, move->first->x);
@@ -219,26 +219,26 @@ void Engine::makeFakeMove(std::pair<Piece*, Square>* move)
 void Engine::fakeMoveNormal(std::pair<Piece*, Square>* move)
 {
 	// source goes to normal
-	Sqr::squareHelper(move->second.x, move->second.y)->piece = *target;
+	Sqr::squareHelper(move->second.x, move->second.y)->piece = target;
 
 	// target goes to normal
-	Sqr::squareHelper(move->first->x, move->first->y)->piece = *move->first;
+	Sqr::squareHelper(move->first->x, move->first->y)->piece = move->first;
 }
 
 void Engine::getEnginePieces()
 {
 	for(int i = 0; i < 8; i++)
 		for(int j = 0; j < 8; j++)
-			if(Sqr::getSquare(i, j).piece.user == ENGINE)
-				enginePieces.push_back(&Pieces::getReal(&Sqr::getSquare(i, j).piece));
+			if(Sqr::getSquare(i, j).piece->user == ENGINE)
+				enginePieces.push_back(&Pieces::getReal(Sqr::getSquare(i, j).piece));
 }
 
 void Engine::getPlayerPieces()
 {
 	for(int i = 0; i < 8; i++)
 		for(int j = 0; j < 8; j++)
-			if(Sqr::getSquare(i, j).piece.user == PLAYER)
-				playerPieces.push_back(&Pieces::getReal(&Sqr::getSquare(i, j).piece));
+			if(Sqr::getSquare(i, j).piece->user == PLAYER)
+				playerPieces.push_back(&Pieces::getReal(Sqr::getSquare(i, j).piece));
 }
 
 void Engine::getEngineMoves()

@@ -3,18 +3,15 @@
 
 #include "Piece.hh"
 #include "Square.hh"
+#include "SquareManager.hh"
 
 #define ARRSIZE(arr) (int)(sizeof(arr)/sizeof(arr[0]))
-
-// return ghost struct
-Piece ghost(int x, int y);
 
 typedef enum { GAME_ON, VICTORY, DEFEAT, DRAW, END } currentGameState;
 
 class Global
 {
 	public:
-
 		// 1 ENGINE WIN -- -1 ENGINE LOSE
 		static double evaluation;
 
@@ -39,6 +36,8 @@ class Global
 		// check
 		static bool playerInCheck;
 		static bool engineInCheck;
+
+		static void ghost(Piece* piece);
 };
 
 #endif
