@@ -1,8 +1,7 @@
 #ifndef UKKOSHAKKI_FONTLOADER_H
 #define UKKOSHAKKI_FONTLOADER_H
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
+#include "Global.hh"
 #include <iostream>
 
 namespace FontLoader {

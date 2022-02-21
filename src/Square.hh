@@ -2,7 +2,7 @@
 #define SQUARE_HH
 
 #include "Piece.hh"
-#include <SDL2/SDL.h>
+#include "Global.hh"
 
 typedef struct Square
 {
