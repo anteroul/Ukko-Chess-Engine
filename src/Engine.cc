@@ -250,7 +250,7 @@ void Engine::getEngineMoves()
 	for(auto& i : enginePieces)
 	{
 		// get legal moves for the piece
-		std::vector<Square> moves = LegalMove::getLegal(*i);
+		std::vector<Square> moves = LegalMove::getLegal(i);
 
 		for(auto& j : moves)
 		{
@@ -267,7 +267,7 @@ void Engine::getPlayerMoves()
 
 	for(auto& i : playerPieces)
 	{
-		std::vector<Square> moves = LegalMove::getLegal(*i);
+		std::vector<Square> moves = LegalMove::getLegal(i);
 		for(auto& j : moves)
 		{
 			playerPairs.push_back(std::make_pair(i, j));

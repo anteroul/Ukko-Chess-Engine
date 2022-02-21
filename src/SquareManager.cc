@@ -16,4 +16,15 @@ namespace Sqr
 	Square& getSquare(int x, int y) { return squares[x][y]; }
 
 	Square squareCopy(int x, int y) { return squares[x][y]; }
+
+	void setPiece(Piece* p)
+	{
+		squares[p->x][p->y].piece = p;
+	}
+
+	Piece* getPiece(int x, int y)
+	{
+		return squares[x][y].piece;
+	}
+
 }

@@ -6,10 +6,10 @@ namespace LegalMove
 	std::vector<Square> sqrs;
 
 	// KNIGHT, KING
-	void xyFindFunc(Piece p, int x, int y)
+	void xyFindFunc(Piece* p, int x, int y)
 	{
 		// pointing to square 
-		Square* s = Sqr::squareHelper((p.x + x), (p.y + y));
+		Square* s = Sqr::squareHelper((p->x + x), (p->y + y));
 
 		// if square is not on board
 		if(s != nullptr)
@@ -20,18 +20,18 @@ namespace LegalMove
 
 				// add if enemy
 			else
-				if(s->piece->color != p.color)
+				if(s->piece->color != p->color)
 					sqrs.push_back(*s);
 		}
 	}
 
 	// ROOK, BISHOP, QUEEN
-	void LooperFunc(Piece p, int x, int y)
+	void LooperFunc(Piece* p, int x, int y)
 	{
 		// max distance
 		for(int i = 1; i < 8; i++)
 		{
-			Square* s = Sqr::squareHelper(p.x + i * x, p.y + i * y);
+			Square* s = Sqr::squareHelper(p->x + i * x, p->y + i * y);
 
 			// if square is not in board
 			if(s != nullptr)
@@ -44,7 +44,7 @@ namespace LegalMove
 				}
 				else
 				{
-					if(s->piece->color != p.color)
+					if(s->piece->color != p->color)
 						sqrs.push_back(*s);
 					break;
 				}
@@ -54,7 +54,7 @@ namespace LegalMove
 		}
 	}
 
-	void Castling(Piece p, bool dir)
+	void Castling(Piece* p, bool dir)
 	{
 		// different directions for castling
 		int n = 0;
@@ -67,7 +67,7 @@ namespace LegalMove
 			if(dir && i == 4)
 				break;
 
-			Square* s = Sqr::squareHelper(p.x + i * n, p.y);
+			Square* s = Sqr::squareHelper(p->x + i * n, p->y);
 
 			// if not on board, this should never happen
 			if(s != nullptr)
@@ -82,35 +82,35 @@ namespace LegalMove
 
 				// can castle
 				else
-					sqrs.push_back(*Sqr::squareHelper(p.x + 2 * n, p.y));
+					sqrs.push_back(*Sqr::squareHelper(p->x + 2 * n, p->y));
 			}
 		}
 	}
 
-	void PawnFunc(Piece p, bool player)
+	void PawnFunc(Piece* p, bool player)
 	{
 		int m = -1;
 
 		// first row is special
 		if(player)
 		{
-			if(p.y == 6)
+			if(p->y == 6)
 			{
-				if(Sqr::squareHelper(p.x, 4)->piece->type == NONE && Sqr::squareHelper(p.x, 5)->piece->type == NONE)
-					sqrs.push_back(*Sqr::squareHelper(p.x, 4));
+				if(Sqr::squareHelper(p->x, 4)->piece->type == NONE && Sqr::squareHelper(p->x, 5)->piece->type == NONE)
+					sqrs.push_back(*Sqr::squareHelper(p->x, 4));
 			}
 		}
 		else
 		{
-			if(p.y == 1)
-				if(Sqr::squareHelper(p.x, 3)->piece->type == NONE && Sqr::squareHelper(p.x, 2)->piece->type == NONE)
-					sqrs.push_back(*Sqr::squareHelper(p.x, 3));
+			if(p->y == 1)
+				if(Sqr::squareHelper(p->x, 3)->piece->type == NONE && Sqr::squareHelper(p->x, 2)->piece->type == NONE)
+					sqrs.push_back(*Sqr::squareHelper(p->x, 3));
 
 			m = 1;
 		}
 
 		// left
-		Square* l = Sqr::squareHelper(p.x + 1 * m, p.y + 1 * m);
+		Square* l = Sqr::squareHelper(p->x + 1 * m, p->y + 1 * m);
 
 		// check that square is on the board
 		if(l != nullptr)
@@ -119,83 +119,76 @@ namespace LegalMove
 			if(l->piece->type != NONE)
 
 				// check that the square color is different to piece
-				if(l->piece->color != p.color)
+				if(l->piece->color != p->color)
 
 					// add square
 					sqrs.push_back(*l);
 
 		// center
-		Square* c = Sqr::squareHelper(p.x, p.y + 1 * m);
+		Square* c = Sqr::squareHelper(p->x, p->y + 1 * m);
 		if(c != nullptr)
 			if(c->piece->type == NONE)
 				sqrs.push_back(*c);
 
 		// right
-		Square* r = Sqr::squareHelper(p.x - 1 * m, p.y + 1 * m);
+		Square* r = Sqr::squareHelper(p->x - 1 * m, p->y + 1 * m);
 		if(r != nullptr)
 			if(r->piece->type != NONE)
-				if(r->piece->color != p.color)
+				if(r->piece->color != p->color)
 					sqrs.push_back(*r);
 
 		// en passant
 		if(Global::en_passant)
-			if(Global::en_passant->y == p.y + 1 * m)
-				if(Global::en_passant->x == p.x + 1 || Global::en_passant->x == p.x - 1)
+			if(Global::en_passant->y == p->y + 1 * m)
+				if(Global::en_passant->x == p->x + 1 || Global::en_passant->x == p->x - 1)
 					sqrs.push_back(*Global::en_passant);
 	}
 
 	// get legal moves for king
-	bool kingInDanger(Square square, Piece piece)
+	bool kingInDanger(Square* square, Piece* piece)
 	{
-		// get opponents pieces
-		int a = piece.user == PLAYER ? 0 : 16;
-		int b = piece.user == PLAYER ? 16 : 32;
-
 		// set the fake move
-		Sqr::getSquare(square.x, square.y).piece = &piece;
+		Sqr::squareHelper(square->x, square->y)->piece = piece;
 
 		// set original square to empty
-		Global::ghost(&piece);
+		Global::ghost(piece);
 
-		for(int i = a; i < b; i++)
+		for(int i = 0; i < 8; i++)
 		{
-			// get all legal moves
-			std::vector<Square> v = LegalMove::get(Pieces::get(i));
-
-			if(!v.empty())
+			for(int j = 0; j < 8; j++)
 			{
-				for(auto j = v.begin(); j < v.end(); j++)
+				std::vector<Square> v = LegalMove::get(Sqr::getPiece(i, j));
+
+				if(!v.empty())
 				{
-					// if king is in check
-					if(j->piece->type == KING)
+					for(auto j = v.begin(); j < v.end(); j++)
 					{
-						// back to normal
-						Sqr::getSquare(square.x, square.y).piece = square.piece;
-						Sqr::getSquare(piece.x, piece.y).piece = &piece;
-						return true;
+						// if king is in check
+						if(j->piece->type == KING)
+						{
+							// back to normal
+							Sqr::getSquare(square->x, square->y).piece = square->piece;
+							Sqr::getSquare(piece->x, piece->y).piece = piece;
+							return true;
+						}
 					}
 				}
 			}
 		}
 
-		Sqr::getSquare(square.x, square.y).piece = square.piece;
-		Sqr::getSquare(piece.x, piece.y).piece = &piece;
+		Sqr::getSquare(square->x, square->y).piece = square->piece;
+		Sqr::getSquare(piece->x, piece->y).piece = piece;
 		return false;
-	}
 
-	std::vector<Square> getLegalPtr(Piece* piece)
-	{
-		return getLegal(*piece);
 	}
-
 
 	// get legal moves
-	std::vector<Square> getLegal(Piece piece)
+	std::vector<Square> getLegal(Piece* piece)
 	{ 
 		// get raw moves for the piece
 		std::vector<Square> v = LegalMove::get(piece);
 
-		if(piece.type != KING)
+		if(piece->type != KING)
 		{
 			// loop all the possible moves 
 			for(auto i = v.begin(); i != v.end(); i++) 
@@ -207,23 +200,23 @@ namespace LegalMove
 				Piece* move = Sqr::getSquare(i->x, i->y).piece;
 
 				// set the fake move
-				Sqr::getSquare(i->x, i->y).piece = &piece;
+				Sqr::getSquare(i->x, i->y).piece = piece;
 
 				// set pieces's square to empty
-				Global::ghost(&piece);
+				Global::ghost(piece);
 
 				// getting the opponent's pieces
-				int a = piece.user == PLAYER ? 0 : 16;
-				int b = piece.user == PLAYER ? 16 : 32;
+				int a = piece->user == PLAYER ? 0 : 16;
+				int b = piece->user == PLAYER ? 16 : 32;
 
 				// loop all opponent's pieces
 				for(int j = a; j < b; j++)
 				{
 					// if piece isn't captured in opponents move
-					if(Sqr::getSquare(Pieces::get(j).x, Pieces::get(j).y).piece->user != piece.user)
+					if(Sqr::getSquare(Pieces::get(j).x, Pieces::get(j).y).piece->user != piece->user)
 					{
 						// get all raw legal moves for the opponent's pieces
-						std::vector<Square> temp = LegalMove::get(Pieces::get(j));
+						std::vector<Square> temp = LegalMove::get(&Pieces::get(j));
 
 						// loop legal moves for the piece
 						for(auto k = temp.begin(); k != temp.end(); k++)
@@ -235,7 +228,7 @@ namespace LegalMove
 								if (!temp.empty())
 								{
 									Sqr::getSquare(i->x, i->y).piece = move;
-									Sqr::getSquare(piece.x, piece.y).piece = &piece;
+									Sqr::getSquare(piece->x, piece->y).piece = piece;
 									backToNormal = true;
 								}
 
@@ -250,7 +243,7 @@ namespace LegalMove
 				if(!backToNormal)
 				{
 					Sqr::getSquare(i->x, i->y).piece = move;
-					Sqr::getSquare(piece.x, piece.y).piece = &piece;
+					Sqr::getSquare(piece->x, piece->y).piece = piece;
 				}
 			}
 		}
@@ -259,7 +252,7 @@ namespace LegalMove
 		{
 			// remove illegal moves for a king
 			for(auto i = v.begin(); i != v.end(); i++)
-				if(kingInDanger(Sqr::getSquare(i->x, i->y), piece))
+				if(kingInDanger(Sqr::squareHelper(i->x, i->y), piece))
 					v.erase(i--);
 		}
 		
@@ -268,14 +261,14 @@ namespace LegalMove
 	}
 
 	// get raw moves
-	std::vector<Square> get(Piece piece)
+	std::vector<Square> get(Piece* piece)
 	{
 		sqrs.clear();
 
-		switch(piece.type)
+		switch(piece->type)
 		{
 			case PAWN:
-				if(piece.user == PLAYER)
+				if(piece->user == PLAYER)
 					PawnFunc(piece, true);
 				else
 					PawnFunc(piece, false);
@@ -304,7 +297,7 @@ namespace LegalMove
 						if(!(i == 0 && j == 0))
 							xyFindFunc(piece, i, j);
 
-				if(piece.user == PLAYER)
+				if(piece->user == PLAYER)
 				{
 					if(Global::playerCanCastleK)
 						Castling(piece, true);

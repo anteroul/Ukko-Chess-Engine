@@ -6,8 +6,6 @@
 
 typedef struct Square
 {
-	//Square() { Square::piece = new Piece; };
-	//~Square() { delete Square::piece; };
 	SDL_Rect rect;
 	Piece* piece = nullptr;
 	int x, y;

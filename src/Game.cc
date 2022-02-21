@@ -64,7 +64,7 @@ void Game::eventHandler()
 			if (selectedSquare->piece->type != NONE && selectedSquare->piece->user == PLAYER)
 			{
 				originalSquare = selectedSquare;
-				legalMoves = LegalMove::getLegal(*originalSquare->piece);
+				legalMoves = LegalMove::getLegal(originalSquare->piece);
 				isPieceSelected = true;
 			}
 		}
@@ -150,7 +150,7 @@ bool Game::moveSetup()
 		if(i.type != 6 && i.user == PLAYER)
 		{
 			// get all legal moves
-			std::vector<Square> temp = LegalMove::getLegal(i);
+			std::vector<Square> temp = LegalMove::getLegal(&i);
 
 			for(auto& j : temp)
 				playerMoves.push_back(j);

@@ -14,12 +14,10 @@
 namespace LegalMove
 {
 	// main function
-	std::vector<Square> get(Piece piece);
+	std::vector<Square> get(Piece* piece);
 
 	// get filtered version
-	std::vector<Square> getLegal(Piece piece);
-
-	std::vector<Square> getLegalPtr(Piece* piece);
+	std::vector<Square> getLegal(Piece* piece);
 }
 
 #endif
