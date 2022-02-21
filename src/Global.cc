@@ -2,21 +2,6 @@
 
 currentGameState Global::state = GAME_ON;
 
-void Global::ghost(Piece* p)
-{
-	p->type = NONE;
-	p->color = UNDEFINED;
-	p->user = GHOST;
-}
-
-void Global::ghostXY(int x, int y)
-{
-	Piece* p = Sqr::squareHelper(x, y)->piece;
-	p->type = NONE;
-	p->color = UNDEFINED;
-	p->user = GHOST;
-}
-
 bool Global::playerTurn = true;
 
 Square* Global::en_passant = nullptr;
@@ -38,5 +23,3 @@ bool Global::engineCanCastleQ = true;
 
 bool Global::playerInCheck = false;
 bool Global::engineInCheck = false;
-
-

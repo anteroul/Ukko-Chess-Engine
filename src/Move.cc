@@ -11,20 +11,16 @@ namespace Move
 	char nameY;
 	std::string promotion;
 
+	// make the square empty
+	void emptySquare(int x, int y)
+	{
+		*Sqr::squareHelper(x, y)->piece = ghost(x, y);
+	}
+
 	// make the piece empty
 	void emptyPiece(int x, int y)
 	{
-		for(int i = 0; i < 32; i++)
-		{
-			Piece* p = Pieces::getModify(i);
-
-			if(p->x == x && p->y == y)
-			{
-				p->type = NONE;
-				p->color = UNDEFINED;
-				p->user = GHOST;
-			}
-		}
+		Pieces::set(ghost(x, y), x, y);
 	}
 
 	void castlingFunc(Piece* source, Piece& rook, bool player, bool queenSide)
@@ -35,26 +31,26 @@ namespace Move
 		// make king's square empty
 		if(player)
 		{
-			Global::ghostXY(4, 7);
+			emptySquare(4, 7);
 			y = 7;
 		}
 		else
 		{
-			Global::ghostXY(4, 0);
+			emptySquare(4, 0);
 			y = 0;
 		}
 		
 		// make rook's square empty and move pieces
 		if(queenSide)
 		{
-			Global::ghostXY(0, y);
+			emptySquare(0, y);
 			source->x -= 2;
 			rook.x += 3;
 			name = "0-0-0";
 		}
 		else
 		{
-			Global::ghostXY(7, y);
+			emptySquare(7, y);
 			source->x += 2;
 			rook.x -= 2;
 			name = "0-0";
@@ -242,13 +238,13 @@ namespace Move
 					if(source->user == PLAYER)
 					{
 						emptyPiece(target.x, (target.y + 1));
-						Global::ghostXY(target.x, (target.y + 1));
+						emptySquare(target.x, (target.y + 1));
 					}
 				
 					else
 					{
 						emptyPiece(target.x, (target.y - 1));
-						Global::ghostXY(target.x, (target.y - 1));
+						emptySquare(target.x, (target.y - 1));
 					}
 				}
 			}
@@ -294,7 +290,7 @@ namespace Move
 		}
 
 		
-		Global::ghost(source);
+		emptySquare(source->x, source->y);
 
 		source->x = target.x;
 		source->y = target.y;
@@ -302,6 +298,7 @@ namespace Move
 		// update square
 		Sqr::squareHelper(source->x, source->y)->piece = source;
 	
+
 		// make the notation
 		name = name + nameSource + " to " + nameX + nameY + promotion;
 

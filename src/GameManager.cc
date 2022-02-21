@@ -18,7 +18,7 @@ namespace GameManager
 			{
 				if(Sqr::squareHelper(i, j)->piece->user == ENGINE)
 				{
-					std::vector<Square> v = LegalMove::get(Sqr::squareHelper(i, j)->piece);
+					std::vector<Square> v = LegalMove::get(*Sqr::squareHelper(i, j)->piece);
 					
 					for(auto& k : v)
 					{
@@ -60,7 +60,7 @@ namespace GameManager
 
 				if(Sqr::squareHelper(i, j)->piece->user == PLAYER)
 				{
-					std::vector<Square> v = LegalMove::get(Sqr::squareHelper(i, j)->piece);
+					std::vector<Square> v = LegalMove::get(*Sqr::squareHelper(i, j)->piece);
 
 					for(auto& k : v)
 					{

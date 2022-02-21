@@ -225,22 +225,6 @@ void Engine::fakeMoveNormal(std::pair<Piece*, Square>* move)
 	Sqr::squareHelper(move->first->x, move->first->y)->piece = move->first;
 }
 
-void Engine::getEnginePieces()
-{
-	for(int i = 0; i < 8; i++)
-		for(int j = 0; j < 8; j++)
-			if(Sqr::getSquare(i, j).piece->user == ENGINE)
-				enginePieces.push_back(&Pieces::getReal(Sqr::getSquare(i, j).piece));
-}
-
-void Engine::getPlayerPieces()
-{
-	for(int i = 0; i < 8; i++)
-		for(int j = 0; j < 8; j++)
-			if(Sqr::getSquare(i, j).piece->user == PLAYER)
-				playerPieces.push_back(&Pieces::getReal(Sqr::getSquare(i, j).piece));
-}
-
 void Engine::getEngineMoves()
 {
 	// get all pieces first
