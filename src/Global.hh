@@ -5,12 +5,19 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#elif __LINUX__
+#endif
+
+#ifdef __LINUX__
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #endif
 
+#ifdef __WIN32__
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#endif
 
 #include "Piece.hh"
 #include "Square.hh"
@@ -29,7 +36,7 @@ class Global
 
 		static bool playerTurn;
 		static currentGameState state;
-		static Square* en_passant;
+		static Square en_passant;
 
 		// castling
 		static bool playerKingMoved;
