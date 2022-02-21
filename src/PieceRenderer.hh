@@ -1,12 +1,12 @@
 #ifndef PIECERENDERER_HH
 #define PIECERENDERER_HH
 
-#include <SDL2/SDL.h>
 #include <iostream>
 #include "Renderer.hh"
 #include "PieceFactory.hh"
 #include "Piece.hh"
 #include "SquareManager.hh"
+#include "Global.hh"
 
 namespace PieceRenderer
 {

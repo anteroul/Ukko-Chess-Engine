@@ -1,7 +1,7 @@
 #ifndef UKKOSHAKKI_GUI_HH
 #define UKKOSHAKKI_GUI_HH
 
-#include "SDL2/SDL.h"
+#include "Global.hh"
 #include "Square.hh"
 #include "SquareManager.hh"
 #include "ScreenSize.hh"

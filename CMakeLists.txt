@@ -3,16 +3,18 @@ project(UkkoShakki)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BUILD_TYPE Debug) # debug mode
-find_package(SDL2 REQUIRED)
+
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
 
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS})
+
 add_executable(UkkoShakki
-	src/main.cc 
+	src/main.cc
 	src/Window.cc
 	src/Renderer.cc
 	src/ScreenSize.cc
-	src/Texture.cc 
-	src/Board.cc 
+	src/Texture.cc
+	src/Board.cc
 	src/PieceFactory.cc
 	src/PieceRenderer.cc
 	src/Game.cc
@@ -30,4 +32,4 @@ add_executable(UkkoShakki
 	src/MinMax.cc
 	)
 
-target_link_libraries(UkkoShakki ${SDL2_LIBRARIES} -lSDL2_image -lSDL2_ttf)
+target_link_libraries(UkkoShakki ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES})
