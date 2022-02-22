@@ -44,14 +44,14 @@ void Board::makeRects()
 
 	// make source bigger than screen size so the source will be the size of the window
 	srcrect.w = Screen::getWidth() * 10;
-	srcrect.h = Screen::getHeight() * 10;
+	srcrect.h = Screen::getHeight(0) * 10;
     
 	dstrect.x = 0;
     dstrect.y = 0;
 
 	// leave space on the right
     dstrect.w = Screen::getWidth() * 0.8f; 
-	dstrect.h = Screen::getHeight();
+	dstrect.h = Screen::getHeight(0);
 }
 
 void Board::render()

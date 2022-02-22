@@ -9,7 +9,7 @@ namespace Screen
 
 	// getters
 	int getWidth();
-	int getHeight();
+	int getHeight(float d);
 }
 
 #endif

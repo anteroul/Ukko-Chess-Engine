@@ -5,6 +5,9 @@
 #include "Square.hh"
 #include "SquareManager.hh"
 #include "ScreenSize.hh"
+#include "Texture.hh"
+#include "Renderer.hh"
+#include "Window.hh"
 
 class GUI
 {

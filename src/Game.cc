@@ -16,7 +16,7 @@ Game::Game()
 
 	// initialize pieces in their correct places
 	Pieces::init();
-	
+
 	// white starts game
 	Settings::PlayerColor == WHITE ? Global::playerTurn = true : Global::playerTurn = false;
 }
@@ -39,7 +39,7 @@ void Game::eventHandler()
 {
 	while (SDL_PollEvent(&e))
 	{
-		// rezise window
+		// resize window
 		window->resize(e);
 
 		// close application
@@ -167,22 +167,23 @@ void Game::playerPlayMove()
 {
 	GameManager::update();
 
-	if(!moveSetup())
+	if (!moveSetup())
 	{
-		if(Global::playerInCheck)
+		if (Global::playerInCheck && legalMoves.empty())
 			Global::state = DEFEAT;
 		else
 			Global::state = DRAW;
-	}
-	else
+	} else if (selectedSquare != originalSquare && isPieceSelected)
 	{
-		// if selected new square
-		if (selectedSquare != originalSquare && isPieceSelected)
+		// loop legal moves for the selected piece
+		for (auto &i: legalMoves)
 		{
-			// loop legal moves for the selected piece
-			for (auto& i : legalMoves)
-				if (selectedSquare->x == i.x && selectedSquare->y == i.y)
-					executePlayerMove(i);
+			if (selectedSquare->x == i.x && selectedSquare->y == i.y)
+				executePlayerMove(i);
+			else if (legalMoves.empty() && Global::playerTurn)
+				if (Global::playerInCheck)
+					Global::state = DEFEAT;
+
 		}
 	}
 }

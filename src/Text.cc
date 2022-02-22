@@ -10,7 +10,7 @@ Text::Text(std::string _text, bool playerTurn) : text(_text)
 		color = { 255, 255, 0, 255 };
 
 	position.x = Screen::getWidth() - 150;
-	position.y = Screen::getHeight() - 25;
+	position.y = Screen::getHeight(0) - 25;
 
 	if (font)
 		setText();

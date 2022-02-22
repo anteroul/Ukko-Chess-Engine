@@ -10,5 +10,6 @@ namespace Screen
 	void setHeight(int h) { height = h; }
 
 	int getWidth() { return width; }
-	int getHeight() { return height; }
+	int getHeight(float d)
+	{ return height; }
 }

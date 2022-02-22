@@ -61,4 +61,3 @@ Window::~Window()
 	window = nullptr;
 	renderer = nullptr;
 }
-

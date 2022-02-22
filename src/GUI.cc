@@ -8,7 +8,7 @@ bool GUI::onMouseRollOver(SDL_Point &mousePos, SDL_Rect &square)
 Square *GUI::onSelect(SDL_Point &mousePos)
 {
 	int x = mousePos.x * 10 / Screen::getWidth();
-	int y = mousePos.y * 8 / Screen::getHeight();
+	int y = mousePos.y * 8 / Screen::getHeight(0);
 
 	if (Sqr::squareHelper(x, y) != nullptr)
 		return &Sqr::getSquare(x, y);
