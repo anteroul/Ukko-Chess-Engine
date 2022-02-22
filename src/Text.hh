@@ -2,8 +2,6 @@
 #define UKKOSHAKKI_TEXT_H
 
 #include <iostream>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
 #include "Renderer.hh"
 #include "ScreenSize.hh"
 #include "FontLoader.hh"

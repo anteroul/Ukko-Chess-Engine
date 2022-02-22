@@ -7,7 +7,10 @@
 #define ARRSIZE(arr) (int)(sizeof(arr)/sizeof(arr[0]))
 
 // return ghost struct
-Piece ghost(int x, int y);
+static Piece ghost(int x, int y)
+{
+    return { NONE, UNDEFINED, x, y, GHOST };
+}
 
 typedef enum { GAME_ON, VICTORY, DEFEAT, DRAW, END } currentGameState;
 
@@ -39,6 +42,8 @@ class Global
 		// check
 		static bool playerInCheck;
 		static bool engineInCheck;
+
+    static void ghost(Piece *pPiece);
 };
 
 #endif

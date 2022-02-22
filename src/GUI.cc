@@ -5,7 +5,7 @@ bool GUI::onMouseRollOver(SDL_Point &mousePos, SDL_Rect &square)
 	return SDL_PointInRect(&mousePos, &square);
 }
 
-Square *GUI::onSelect(SDL_Point &mousePos)
+Square* GUI::onSelect(SDL_Point &mousePos)
 {
 	int x = mousePos.x * 10 / Screen::getWidth();
 	int y = mousePos.y * 8 / Screen::getHeight(0);

@@ -1,7 +1,7 @@
 #ifndef BOARD_HH
 #define BOARD_HH
 
-#include <SDL2/SDL.h>
+#include "Global.hh"
 #include "ScreenSize.hh"
 #include "Renderer.hh"
 #include "SquareManager.hh"

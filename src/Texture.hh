@@ -10,7 +10,7 @@
 
 namespace Texture
 {
-	SDL_Texture* load(std::string path);
+    SDL_Texture* load(std::string path);
 }
 
 #endif

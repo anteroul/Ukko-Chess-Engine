@@ -28,7 +28,6 @@ class Game
 		void updateGame();
 		bool ApplicationShouldClose = false;
 	private:
-		bool moveSetup();
 		void playerPlayMove();
 		void enginePlayMove();
 		void render();
@@ -38,10 +37,8 @@ class Game
 		void updateConsoleText(const std::string& text);
 		void executePlayerMove(Square& sq);
 
-		std::vector<Square> playerMoves;
 		std::vector<Square> legalMoves;
-		std::vector<Piece> playerPieces;
-		
+
 		// console stuff
 		std::vector<Text*> console;
 		int consoleIndex = 0;

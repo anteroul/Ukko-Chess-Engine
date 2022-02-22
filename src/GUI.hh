@@ -12,8 +12,8 @@
 class GUI
 {
 public:
-	static bool onMouseRollOver(SDL_Point &mousePos, SDL_Rect &square);
-	static Square *onSelect(SDL_Point &mousePos);
+    static bool onMouseRollOver(SDL_Point &mousePos, SDL_Rect &square);
+    static Square *onSelect(SDL_Point &mousePos);
 };
 
 

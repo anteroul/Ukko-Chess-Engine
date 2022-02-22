@@ -1,7 +1,7 @@
 #ifndef RENDERER_HH
 #define RENDERER_HH
 
-#include <SDL2/SDL.h>
+#include "Global.hh"
 
 namespace Renderer
 {

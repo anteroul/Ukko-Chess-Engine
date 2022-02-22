@@ -6,7 +6,7 @@
 #include <iostream>
 
 namespace FontLoader {
-	TTF_Font* loadFont(std::string path, int fontSize);
+    TTF_Font* loadFont(std::string path, int fontSize);
 }
 
 #endif //UKKOSHAKKI_FONTLOADER_H

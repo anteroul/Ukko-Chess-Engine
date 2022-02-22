@@ -2,11 +2,6 @@
 
 currentGameState Global::state = GAME_ON;
 
-Piece ghost(int x, int y)
-{
-	return { NONE, UNDEFINED, x, y, GHOST };
-}
-
 bool Global::playerTurn = true;
 
 Square* Global::en_passant = nullptr;
@@ -28,5 +23,3 @@ bool Global::engineCanCastleQ = true;
 
 bool Global::playerInCheck = false;
 bool Global::engineInCheck = false;
-
-

@@ -1,7 +1,6 @@
 #ifndef PIECEFACTORY_HH
 #define PIECEFACTORY_HH
 
-#include <SDL2/SDL.h>
 #include <string>
 #include "Texture.hh"
 #include "Board.hh"

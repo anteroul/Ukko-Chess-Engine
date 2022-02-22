@@ -15,12 +15,12 @@ namespace LegalMove
 		if(s != nullptr)
 		{
 			// if square is empty
-			if(s->piece.type == NONE)
+			if(s->piece->type == NONE)
 				sqrs.push_back(*s);
 
 				// add if enemy
 			else
-				if(s->piece.color != p.color)
+				if(s->piece->color != p.color)
 					sqrs.push_back(*s);
 		}
 	}
@@ -37,14 +37,14 @@ namespace LegalMove
 			if(s != nullptr)
 			{
 				// add if square is empty
-				if(s->piece.type == NONE)
+				if(s->piece->type == NONE)
 				{
 					sqrs.push_back(*s);
 					continue;
 				}
 				else
 				{
-					if(s->piece.color != p.color)
+					if(s->piece->color != p.color)
 						sqrs.push_back(*s);
 					break;
 				}
@@ -73,11 +73,11 @@ namespace LegalMove
 			if(s != nullptr)
 			{
 				// empty square
-				if(s->piece.type == NONE)
+				if(s->piece->type == NONE)
 					continue;
 
 				// something in the middle, can't castle
-				else if(s->piece.type != NONE && s->piece.type != ROOK)
+				else if(s->piece->type != NONE && s->piece->type != ROOK)
 					break;
 
 				// can castle
@@ -95,13 +95,13 @@ namespace LegalMove
 		if(player)
 		{
 			if(p.y == 6)
-				if(Sqr::squareHelper(p.x, 4)->piece.type == NONE && Sqr::squareHelper(p.x, 5)->piece.type == NONE)
+				if(Sqr::squareHelper(p.x, 4)->piece->type == NONE && Sqr::squareHelper(p.x, 5)->piece->type == NONE)
 					sqrs.push_back(*Sqr::squareHelper(p.x, 4));
 		}
 		else
 		{
 			if(p.y == 1)
-				if(Sqr::squareHelper(p.x, 3)->piece.type == NONE && Sqr::squareHelper(p.x, 2)->piece.type == NONE)
+				if(Sqr::squareHelper(p.x, 3)->piece->type == NONE && Sqr::squareHelper(p.x, 2)->piece->type == NONE)
 					sqrs.push_back(*Sqr::squareHelper(p.x, 3));
 
 			m = 1;
@@ -114,10 +114,10 @@ namespace LegalMove
 		if(l != nullptr)
 
 			// check if square is empty of pieces
-			if(l->piece.type != NONE)
+			if(l->piece->type != NONE)
 
 				// check that the square color is different to piece
-				if(l->piece.color != p.color)
+				if(l->piece->color != p.color)
 
 					// add square
 					sqrs.push_back(*l);
@@ -125,14 +125,14 @@ namespace LegalMove
 		// center
 		Square* c = Sqr::squareHelper(p.x, p.y + 1 * m);
 		if(c != nullptr)
-			if(c->piece.type == NONE)
+			if(c->piece->type == NONE)
 				sqrs.push_back(*c);
 
 		// right
 		Square* r = Sqr::squareHelper(p.x - 1 * m, p.y + 1 * m);
 		if(r != nullptr)
-			if(r->piece.type != NONE)
-				if(r->piece.color != p.color)
+			if(r->piece->type != NONE)
+				if(r->piece->color != p.color)
 					sqrs.push_back(*r);
 
 		// en passant
@@ -150,10 +150,10 @@ namespace LegalMove
 		int b = piece.user == PLAYER ? 16 : 32;
 
 		// set the fake move
-		Sqr::getSquare(square.x, square.y).piece = piece;
+		Sqr::getSquare(square.x, square.y).piece = &piece;
 
 		// set original square to empty
-		Sqr::getSquare(piece.x, piece.y).piece = ghost(piece.x, piece.y);
+		*Sqr::getSquare(piece.x, piece.y).piece = ghost(piece.x, piece.y);
 
 		for(int i = a; i < b; i++)
 		{
@@ -165,11 +165,11 @@ namespace LegalMove
 				for(auto j = v.begin(); j < v.end(); j++)
 				{
 					// if king is in check
-					if(j->piece.type == KING)
+					if(j->piece->type == KING)
 					{
 						// back to normal
 						Sqr::getSquare(square.x, square.y).piece = square.piece;
-						Sqr::getSquare(piece.x, piece.y).piece = piece;
+						Sqr::getSquare(piece.x, piece.y).piece = &piece;
 						return true;
 					}
 				}
@@ -177,7 +177,7 @@ namespace LegalMove
 		}
 
 		Sqr::getSquare(square.x, square.y).piece = square.piece;
-		Sqr::getSquare(piece.x, piece.y).piece = piece;
+		Sqr::getSquare(piece.x, piece.y).piece = &piece;
 		return false;
 	}
 
@@ -197,13 +197,13 @@ namespace LegalMove
 				bool backToNormal = false;
 
 				// get original value of piece in the square where the move happens
-				Piece move = Sqr::getSquare(i->x, i->y).piece;
+				Piece* move = Sqr::getSquare(i->x, i->y).piece;
 
 				// set the fake move
-				Sqr::getSquare(i->x, i->y).piece = piece;
+				Sqr::getSquare(i->x, i->y).piece = &piece;
 
-				// set pieces's square to empty
-				Sqr::getSquare(piece.x, piece.y).piece = ghost(piece.x, piece.y);
+				// set piece's square to empty
+                *Sqr::getSquare(piece.x, piece.y).piece = ghost(piece.x, piece.y);
 
 				// getting the opponent's pieces
 				int a = piece.user == PLAYER ? 0 : 16;
@@ -213,7 +213,7 @@ namespace LegalMove
 				for(int j = a; j < b; j++)
 				{
 					// if piece isn't captured in opponents move
-					if(Sqr::getSquare(Pieces::get(j).x, Pieces::get(j).y).piece.user != piece.user)
+					if(Sqr::getSquare(Pieces::get(j).x, Pieces::get(j).y).piece->user != piece.user)
 					{
 						// get all raw legal moves for the opponent's pieces
 						std::vector<Square> temp = LegalMove::get(Pieces::get(j));
@@ -222,17 +222,17 @@ namespace LegalMove
 						for(auto k = temp.begin(); k != temp.end(); k++)
 						{
 							// king is in check
-							if(k->piece.type == KING)
+							if(k->piece->type == KING)
 							{
 								// set move back to normal
 								if (!temp.empty())
 								{
 									Sqr::getSquare(i->x, i->y).piece = move;
-									Sqr::getSquare(piece.x, piece.y).piece = piece;
+									Sqr::getSquare(piece.x, piece.y).piece = &piece;
 									backToNormal = true;
 								}
 
-								// delete move, substract from moves after deletion
+								// delete move, subtract from moves after deletion
 								if(!v.empty())
 									v.erase(i--);
 							}
@@ -243,7 +243,7 @@ namespace LegalMove
 				if(!backToNormal)
 				{
 					Sqr::getSquare(i->x, i->y).piece = move;
-					Sqr::getSquare(piece.x, piece.y).piece = piece;
+					Sqr::getSquare(piece.x, piece.y).piece = &piece;
 				}
 			}
 		}
