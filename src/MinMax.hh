@@ -7,15 +7,13 @@
 
 class MinMax
 {
-	public:
-		MinMax(double evaluation, std::pair<Square, Square>* bestMove);
-		MinMax();
-
-		void setEval(double evaluation);
-		void setMove(std::pair<Square, Square>* bestMove);
-
-		double _evaluation;
-		std::pair<Square, Square>* _bestMove;
+public:
+	MinMax(double evaluation, std::pair<Piece *, Square> *bestMove);
+	MinMax();
+	void setEval(double evaluation);
+	void setMove(std::pair<Piece *, Square> *bestMove);
+	double _evaluation;
+	std::pair<Piece *, Square> *_bestMove;
 };
 
 #endif

@@ -17,12 +17,12 @@ public:
 	~Text();
 	void setText();
 	void render();
-	SDL_Rect position;
+	SDL_Rect position{};
 private:
 	std::string text;
 	TTF_Font* font;
-	SDL_Texture* textTexture;
-	SDL_Color color;
+	SDL_Texture* textTexture{};
+	SDL_Color color{};
 };
 
 

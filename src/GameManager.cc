@@ -8,14 +8,14 @@ namespace GameManager
 		Global::playerCanCastleQ = true;
 		Global::playerInCheck = false;
 
-		for(int i = 0; i < 16; i++)
+		for (int i = 0; i < 16; i++)
 		{
 			std::vector v = LegalMove::get(Pieces::get(i));
 
-			for(int j = 0; j < (int)v.size(); j++)
+			for (auto &j: v)
 			{
 				// see checks
-				if(v.at(j).piece.type == KING)
+				if (j.piece.type == 5)
 				{
 					Global::playerInCheck = true;
 					Global::playerCanCastleQ = false;
@@ -23,25 +23,22 @@ namespace GameManager
 				}
 
 				// possibility to castle
-				if(!Global::playerKingMoved)
+				if (!Global::playerKingMoved)
 				{
-					if(!Global::playerKsideRookMoved)
+					if (!Global::playerKsideRookMoved)
 					{
-						if((v.at(j).x == 5 && v.at(j).y == 7) || (v.at(j).x == 6 && v.at(j).y == 7))
+						if ((j.x == 5 && j.y == 7) || (j.x == 6 && j.y == 7))
 							Global::playerCanCastleK = false;
-					}
-					else
+					} else
 						Global::playerCanCastleK = false;
-					
-					if(!Global::playerQsideRookMoved)
+
+					if (!Global::playerQsideRookMoved)
 					{
-						if((v.at(j).x == 1 && v.at(j).y == 7) || (v.at(j).x == 2 && v.at(j).y == 7))
+						if ((j.x == 1 && j.y == 7) || (j.x == 2 && j.y == 7))
 							Global::playerCanCastleQ = false;
-					}
-					else
+					} else
 						Global::playerCanCastleQ = false;
-				}
-				else
+				} else
 				{
 					Global::playerCanCastleQ = false;
 					Global::playerCanCastleK = false;
@@ -53,13 +50,13 @@ namespace GameManager
 		Global::engineCanCastleQ = true;
 		Global::engineInCheck = false;
 
-		for(int i = 16; i < 32; i++)
+		for (int i = 16; i < 32; i++)
 		{
 			std::vector v = LegalMove::get(Pieces::get(i));
-			for(int j = 0; j < (int)v.size(); j++)
+			for (auto &j: v)
 			{
 				// see checks
-				if(v.at(j).piece.type == KING)
+				if (j.piece.type == 5)
 				{
 					Global::engineInCheck = true;
 					Global::engineCanCastleK = false;
@@ -67,26 +64,23 @@ namespace GameManager
 				}
 
 				// possibility to castle
-				if(!Global::engineKingMoved)
+				if (!Global::engineKingMoved)
 				{
-					if(!Global::engineKsideRookMoved)
+					if (!Global::engineKsideRookMoved)
 					{
-						if((v.at(j).x == 5 && v.at(j).y == 0) || (v.at(j).x == 6 && v.at(j).y == 7))
+						if ((j.x == 5 && j.y == 0) || (j.x == 6 && j.y == 7))
 							Global::engineCanCastleK = false;
-					}
-					else
+					} else
 						Global::engineCanCastleK = false;
 
-					if(!Global::engineQsideRookMoved)
+					if (!Global::engineQsideRookMoved)
 					{
-						if((v.at(j).x == 1  && v.at(j).y == 0) || (v.at(j).x == 2 && v.at(j).y == 0))
+						if ((j.x == 1 && j.y == 0) || (j.x == 2 && j.y == 0))
 							Global::playerCanCastleQ = false;
-					}
-					else
+					} else
 						Global::engineCanCastleQ = false;
 
-				}
-				else
+				} else
 				{
 					Global::engineCanCastleK = false;
 					Global::engineCanCastleQ = false;

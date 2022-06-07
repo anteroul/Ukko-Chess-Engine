@@ -10,7 +10,7 @@
 
 namespace PieceRenderer
 {
-	void init(PieceFactory* factory);
+	void init(PieceFactory *factory);
 	void renderInPosition(Piece piece);
 };
 

@@ -12,18 +12,19 @@ Window::Window()
 
 	// store screen sizes
 	setSizes();
-	
+
 	// create window
-	window = SDL_CreateWindow("Chess", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_RESIZABLE);
+	window = SDL_CreateWindow("Chess", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height,
+							  SDL_WINDOW_RESIZABLE);
 
 	// if window creation fails
-	if(!window)
+	if (!window)
 		std::cout << "Could not create window! " << SDL_GetError() << "\n";
 	else
 	{
 		// create the renderer
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-		if(!renderer)
+		if (!renderer)
 			std::cout << "Could not create renderer! " << SDL_GetError() << "\n";
 		else
 		{
@@ -35,16 +36,16 @@ Window::Window()
 
 void Window::resize(SDL_Event e)
 {
-	switch(e.type)
+	switch (e.type)
 	{
 		case SDL_WINDOWEVENT:
-		if(e.window.event == SDL_WINDOWEVENT_RESIZED)
-		{
-			// get new screensize and set it accordingly
-			SDL_GetWindowSize(window, &width, &height);
-			setSizes();
-		}
-		break;
+			if (e.window.event == SDL_WINDOWEVENT_RESIZED)
+			{
+				// get new screensize and set it accordingly
+				SDL_GetWindowSize(window, &width, &height);
+				setSizes();
+			}
+			break;
 	}
 }
 

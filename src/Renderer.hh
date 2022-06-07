@@ -7,7 +7,6 @@ namespace Renderer
 {
 	SDL_Renderer* get();
 	void set(SDL_Renderer* _renderer);
-
 	void setColor(int r, int g, int b);
 	void clear();
 	void render();

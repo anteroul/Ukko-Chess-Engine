@@ -6,7 +6,6 @@
 #include "Texture.hh"
 #include "Board.hh"
 #include "Global.hh"
-#include <cstdlib>
 
 class PieceFactory
 {

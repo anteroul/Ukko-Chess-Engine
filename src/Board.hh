@@ -8,16 +8,15 @@
 
 class Board
 {
-	public: 
-		Board();
-		void render();
-		void makeBoard() const;
-		void makeRects();
-	
-	private:
-		// source and destination for texture
-		SDL_Rect srcrect{};
-		SDL_Rect dstrect{};
+public:
+	Board();
+	void render();
+	void makeBoard() const;
+	void makeRects();
+private:
+	// source and destination for texture
+	SDL_Rect srcrect{};
+	SDL_Rect dstrect{};
 };
 
 #endif

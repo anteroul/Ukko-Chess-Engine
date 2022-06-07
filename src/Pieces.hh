@@ -12,28 +12,16 @@ namespace Pieces
 	void init();
 
 	// getting individual piece
-	Piece& get(int n);
+	Piece &get(int n);
 
-	Piece* getModify(int n);
+	Piece *getModify(int n);
 
-	Piece* getRealFromPiece(Piece* piece);
-
-	Piece* getRealFromSquare(Square* square);
-
-	Piece* getXY(int x, int y);
+	Piece &getReal(Piece *piece);
 
 	// set piece
 	void set(Piece p, int x, int y);
 
-	void setSquare(Piece* p, Square s);
-
-	void emptyPiece(int x, int y); 
-
-	void emptySquare(int x, int y);
-
-	void makeEmptySquare(Square* square);
-
-	void makeEmptyPiece(Piece* piece);
+	void setSquare(Piece *p, Square s);
 }
 
 #endif

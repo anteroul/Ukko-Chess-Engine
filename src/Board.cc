@@ -8,9 +8,9 @@ void Board::makeBoard() const
 	auto width = srcrect.w / 10 / 8 * 0.8f;
 	auto height = srcrect.h / 10 / 8;
 
-	for(int i = 0; i < 8; i++)
+	for (int i = 0; i < 8; i++)
 	{
-		for(int j = 0; j < 8; j++)
+		for (int j = 0; j < 8; j++)
 		{
 			// make all squares
 			Sqr::getSquare(i, j).rect.x = i * width;
@@ -21,18 +21,17 @@ void Board::makeBoard() const
 			// x and y positions to squares
 			Sqr::getSquare(i, j).x = i;
 			Sqr::getSquare(i, j).y = j;
-			
+
 			// different colors to every other square
-			if((i % 2 == 0 && j % 2 != 0) || (i % 2 != 0 && j % 2 == 0))
+			if ((i % 2 == 0 && j % 2 != 0) || (i % 2 != 0 && j % 2 == 0))
 			{
-                Renderer::setColor(64, 48, 0);
+				Renderer::setColor(64, 48, 0);
 				Renderer::fillRect(Sqr::getSquare(i, j).rect);
-			} 
-			else 
+			} else
 			{
-                Renderer::setColor(128, 64, 0);
-                Renderer::fillRect(Sqr::getSquare(i, j).rect);
-            }
+				Renderer::setColor(128, 64, 0);
+				Renderer::fillRect(Sqr::getSquare(i, j).rect);
+			}
 		}
 	}
 }
@@ -45,12 +44,12 @@ void Board::makeRects()
 	// make source bigger than screen size so the source will be the size of the window
 	srcrect.w = Screen::getWidth() * 10;
 	srcrect.h = Screen::getHeight() * 10;
-    
+
 	dstrect.x = 0;
-    dstrect.y = 0;
+	dstrect.y = 0;
 
 	// leave space on the right
-    dstrect.w = Screen::getWidth() * 0.8f; 
+	dstrect.w = Screen::getWidth() * 0.8f;
 	dstrect.h = Screen::getHeight();
 }
 

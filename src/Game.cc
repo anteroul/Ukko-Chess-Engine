@@ -16,9 +16,9 @@ Game::Game()
 
 	// initialize pieces in their correct places
 	Pieces::init();
-	
+
 	// white starts game
-	Global::playerTurn = Settings::PlayerColor == WHITE;
+	Settings::PlayerColor == WHITE ? Global::playerTurn = true : Global::playerTurn = false;
 }
 
 Game::~Game()
@@ -61,11 +61,23 @@ void Game::eventHandler()
 			selectedSquare = GUI::onSelect(mousePos);
 
 			// render possible moves
-			if (selectedSquare->piece.type != NONE && selectedSquare->piece.user == PLAYER)
+			if (Global::playerTurn)
 			{
-				originalSquare = selectedSquare;
-				legalMoves = LegalMove::getLegal(originalSquare->piece);
-				isPieceSelected = true;
+				if (selectedSquare->piece.type != NONE && selectedSquare->piece.user == PLAYER)
+				{
+					originalSquare = selectedSquare;
+					legalMoves = LegalMove::getLegal(originalSquare->piece);
+					isPieceSelected = true;
+				}
+			}
+			else
+			{
+				if (selectedSquare->piece.type != NONE && selectedSquare->piece.user == ENGINE)
+				{
+					originalSquare = selectedSquare;
+					legalMoves = LegalMove::getLegal(originalSquare->piece);
+					isPieceSelected = true;
+				}
 			}
 		}
 
@@ -125,7 +137,7 @@ void Game::render()
 			}
 		}
 	}
-	
+
 	// render pieces
 	for (int i = 0; i < 32; i++)
 		PieceRenderer::renderInPosition(Pieces::get(i));
@@ -139,20 +151,22 @@ bool Game::moveSetup()
 	playerPieces.clear();
 	playerMoves.clear();
 
-	// get squares of pieces
-	for(int i = 0; i < 8; i++)
-		for(int j = 0; j < 8; j++)
-			if(Sqr::squareHelper(i, j)->piece.user == PLAYER)
-				playerPieces.push_back(*Sqr::squareHelper(i, j));
+	// "raw pieces"
+	for(int i = 16; i < 32; i++)
+		playerPieces.push_back(Pieces::get(i));
 
 	// loop all pieces
 	for(auto& i : playerPieces)
 	{
-		// get all legal moves
-		std::vector<Square> temp = LegalMove::getLegal(i.piece);
+		// filter pieces
+		if(i.type != NONE && i.user == PLAYER)
+		{
+			// get all legal moves
+			std::vector<Square> temp = LegalMove::getLegal(i);
 
-		for(auto& j : temp)
-			playerMoves.push_back(j);
+			for(auto& j : temp)
+				playerMoves.push_back(j);
+		}
 	}
 
 	return !playerMoves.empty();
@@ -178,7 +192,7 @@ void Game::playerPlayMove()
 			for (auto& i : legalMoves)
             {
                 if (selectedSquare->x == i.x && selectedSquare->y == i.y)
-                    executePlayerMove(&i);
+                    executePlayerMove(i);
                 else
                     isPieceSelected = false;
             }
@@ -186,18 +200,25 @@ void Game::playerPlayMove()
 	}
 }
 
-void Game::executePlayerMove(Square* sq)
+void Game::executePlayerMove(Square& sq)
 {
-	for(auto& i : playerPieces)
+	// loop players pieces to find the correct one
+	for (int i = 16; i < 32; i++)
 	{
-		if(originalSquare->x == i.x && originalSquare->y == i.y)
+		// filter moves
+		if (Pieces::get(i).user == PLAYER && Pieces::get(i).type != NONE)
 		{
-			// make the move
-			Move::execute(Sqr::squareHelper(i.x, i.y), Sqr::squareHelper(sq->x, sq->y), true);
-			
-			legalMoves.clear();
-			isPieceSelected = false;
-			updateConsole();
+			// loop pieces and find correct one
+			if (originalSquare == &Sqr::getSquare(Pieces::get(i).x, Pieces::get(i).y))
+			{
+				// make the move
+				Move::execute(&Pieces::get(i), sq);
+
+				legalMoves.clear();
+				isPieceSelected = false;
+				updateConsole();
+				Global::playerTurn = false;
+			}
 		}
 	}
 }
@@ -206,9 +227,33 @@ void Game::executePlayerMove(Square* sq)
 void Game::enginePlayMove()
 {
 	GameManager::update();
-	//std::this_thread::sleep_for(std::chrono::milliseconds(300));
-	engine.PlayMove();
-	updateConsole();
+
+	if(!engine.moveSetup())
+	{
+		if(Global::playerInCheck)
+			Global::state = DEFEAT;
+		else
+			Global::state = DRAW;
+	}
+	else
+	{
+		// if selected new square
+		if (selectedSquare != originalSquare && isPieceSelected)
+		{
+			// loop legal moves for the selected piece
+			for (auto& i : legalMoves)
+			{
+				if (selectedSquare->x == i.x && selectedSquare->y == i.y)
+				{
+					engine.executeMove(originalSquare, i);
+					updateConsole();
+					Global::playerTurn = true;
+				}
+				else
+					isPieceSelected = false;
+			}
+		}
+	}
 }
 
 // update console output
@@ -254,7 +299,6 @@ void Game::resetGame()
 	// pieces to their correct places
 	Pieces::init();
 
-	//TODO function in global for reset
 	// gameplay settings to normal
 	Global::playerKingMoved = false;
 	Global::engineKingMoved = false;

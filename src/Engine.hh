@@ -8,7 +8,6 @@
 #include "Move.hh"
 #include "SquareManager.hh"
 #include "MinMax.hh"
-#include "SquareCopy.hh"
 #include <vector>
 #include <iostream>
 #include <map>
@@ -17,59 +16,14 @@
 class Engine
 {
 public:
-    Engine();
-    ~Engine();
-    bool PlayMove();
+	Engine();
+	~Engine();
+	static void executeMove(Square* source, Square& target);
+	bool moveSetup();
 private:
-    // get all pieces
-    void getEnginePieces();
-    void getPlayerPieces();
-    std::vector<Square> enginePieces;
-    std::vector<Square> playerPieces;
-
-    // get all possible moves
-    void getEngineMoves();
-    void getPlayerMoves();
-	std::vector<std::pair<Square, Square>> enginePairs;
-    std::vector<std::pair<Square, Square>> playerPairs;
-
-    // get the best possible move
-    MinMax engineBest();
-    MinMax playerBest();
-    
-	// evaluation
-    void getMaterialBalance();
-    int evaluate();
-	double oldEvaluate();
-    double materialValue(bool player);
-    double getValue(Square square);
-	double engineMaterial;
-    double playerMaterial;
-	Piece* getKing(bool player);
-
-	// get the place of the king
-	Piece* engineKing = nullptr;
-	Piece* playerKing = nullptr;
-
-    // minmax
-    MinMax mini(int depth);
-    MinMax maxi(int depth);
-
-	// fake move stuff
-    void makeFakeMove(std::pair<Square, Square> move);
-	void setOriginalSquares();
-	void squaresToOriginal();
-	void setCurrentSquares(std::array <std::array <Square, 8>, 8> currentSquares);
-
-	std::array <std::array <Square, 8>, 8> currentSquares;
-	std::array <std::array <Square, 8>, 8> originalSquares;
-
-	// helper functions
-	void clearEngine();
-    void clearPlayer();
-	
-	int rounds;
-	
+	std::vector<Square> playerMoves;
+	std::vector<Square> legalMoves;
+	std::vector<Piece> playerPieces;
 };
 
 #endif

@@ -6,7 +6,6 @@
 #include "Pieces.hh"
 #include "SquareManager.hh"
 #include "Global.hh"
-#include "SquareCopy.hh"
 #include <iostream>
 #include <string>
 
@@ -14,7 +13,7 @@
 
 namespace Move
 {
-	void execute(Square* source, Square* target, bool real);
+	void execute(Piece *source, Square target);
 	std::string getName();
 }
 

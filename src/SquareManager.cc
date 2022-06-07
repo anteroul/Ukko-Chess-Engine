@@ -1,9 +1,9 @@
 #include "SquareManager.hh"
 
-// the actual squares
 namespace Sqr
 {
-	std::array <std::array <Square, 8>, 8> squares;
+	// the actual squares
+	static Square squares[8][8];
 
 	Square* squareHelper(int x, int y)
 	{
@@ -15,8 +15,5 @@ namespace Sqr
 
 	Square& getSquare(int x, int y) { return squares[x][y]; }
 
-	std::array <std::array <Square, 8>, 8> copy()
-	{
-		return squares;
-	}
+	Square squareCopy(int x, int y) { return squares[x][y]; }
 }

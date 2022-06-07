@@ -1,7 +1,9 @@
+#include <utility>
+
 #include "Text.hh"
 
 
-Text::Text(std::string _text, bool playerTurn) : text(_text)
+Text::Text(std::string _text, bool playerTurn) : text(std::move(_text))
 {
 	font = FontLoader::loadFont("Assets/Fonts/mytype.ttf", 14);
 	if (!playerTurn)
