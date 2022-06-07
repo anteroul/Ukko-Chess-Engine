@@ -3,7 +3,6 @@
 namespace Pieces
 {
 	// the pieces
-	// TODO
 	static Piece p[32];
 
 	Piece &get(int n)
@@ -32,8 +31,6 @@ namespace Pieces
 			if (i.x == piece->x && i.y == piece->y
 				&& i.user == piece->user && i.type == piece->type)
 				return i;
-
-		// TODO fix this, although this should never happen
 
 		return p[31];
 	}
@@ -101,7 +98,6 @@ namespace Pieces
 		Sqr::getSquare(3, 7).piece = p[30];
 		Sqr::getSquare(4, 7).piece = p[31];
 
-		// TODO
 		// initialize empty squares as empty
 		for (int y = 2; y < 6; y++)
 			for (int x = 0; x < 8; x++)

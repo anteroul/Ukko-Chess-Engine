@@ -1,9 +1,9 @@
-# Ukko Chess Engine v0.1.3 alpha
+# Ukko Chess Engine v0.1.5 alpha
 
 #### Changes:
-- Most major bugs fixed including "ghost pieces".
-- AI disabled.
+- AI disabled
+- Button struct
 
 #### TODO:
-- Implement multiplayer
-- GUI based pawn promotion
+- Implement online multiplayer
+- GUI based pawn promotion (in progress)

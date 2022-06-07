@@ -214,50 +214,48 @@ namespace Move
 					std::cout << "PLAYER PAWN GETS PROMOTED IN " << nameX << nameY << "\n";
 					std::cout << "CHOOSE PIECE:\n";
 					showPieces
-
-					bool choiceMade = false;
 					char choice;
+					Global::inPromotion = true;
+					Piece *orig = source;
 
-					while (!choiceMade)
+					if (Global::inPromotion)
 					{
 						std::cin >> choice;
-
-						Piece *orig = source;
 
 						switch (choice)
 						{
 							case 'Q':
 								source->type = QUEEN;
 								promotion = 'Q';
-								choiceMade = true;
+								Global::inPromotion = false;
 								break;
 							case 'R':
 								source->type = ROOK;
 								promotion = 'R';
-								choiceMade = true;
+								Global::inPromotion = false;
 								break;
 							case 'B':
 								source->type = BISHOP;
 								promotion = 'B';
-								choiceMade = true;
+								Global::inPromotion = false;
 								break;
 							case 'N':
 								source->type = KNIGHT;
 								promotion = 'N';
-								choiceMade = true;
+								Global::inPromotion = false;
 								break;
 							default:
 								std::cout << "INCORRECT OPTION\nCHOOSE AGAIN!\n";
 								showPieces
 								break;
 						}
-
-						source->color = orig->color;
-						source->user = orig->user;
 					}
+
+					source->color = orig->color;
+					source->user = orig->user;
+					Global::inPromotion = false;
 				}
 			}
-				// source.user == ENGINE
 			else
 			{
 				// engine always picks queen, at least for now
@@ -315,7 +313,7 @@ namespace Move
 		// REGULAR MOVE
 
 		// capturing piece
-		if (target.piece.type != 6)
+		if (target.piece.type != NONE)
 		{
 			for (int i = 0; i < 32; i++)
 			{

@@ -198,7 +198,7 @@ namespace LegalMove
 				// set the fake move
 				Sqr::getSquare(i->x, i->y).piece = piece;
 
-				// set pieces's square to empty
+				// set piece's square to empty
 				Sqr::getSquare(piece.x, piece.y).piece = ghost(piece.x, piece.y);
 
 				// getting the opponent's pieces
@@ -228,7 +228,7 @@ namespace LegalMove
 									backToNormal = true;
 								}
 
-								// delete move, substract from moves after deletion
+								// delete move, subtract from moves after deletion
 								if (!v.empty())
 									v.erase(i--);
 							}

@@ -26,4 +26,6 @@ bool Global::engineCanCastleQ = true;
 bool Global::playerInCheck = false;
 bool Global::engineInCheck = false;
 
+bool Global::inPromotion = false;
+
 
