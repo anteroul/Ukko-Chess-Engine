@@ -6,3 +6,4 @@
 
 #### TODO:
 - Implement multiplayer
+- GUI based pawn promotion

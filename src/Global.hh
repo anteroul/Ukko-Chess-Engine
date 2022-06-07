@@ -16,7 +16,7 @@ class Global
 	public:
 
 		// 1 ENGINE WIN -- -1 ENGINE LOSE
-		static double evaluation;
+		[[maybe_unused]] static double evaluation;
 
 		static bool playerTurn;
 		static currentGameState state;
