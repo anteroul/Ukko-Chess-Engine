@@ -1,4 +1,5 @@
 #include "Move.hh"
+#include "GUI.hh"
 
 namespace Move
 {
@@ -220,34 +221,39 @@ namespace Move
 
 					if (Global::inPromotion)
 					{
-						std::cin >> choice;
+						GUI::displayPromotionTable();
 
-						switch (choice)
+						while (Global::inPromotion)
 						{
-							case 'Q':
-								source->type = QUEEN;
-								promotion = 'Q';
-								Global::inPromotion = false;
-								break;
-							case 'R':
-								source->type = ROOK;
-								promotion = 'R';
-								Global::inPromotion = false;
-								break;
-							case 'B':
-								source->type = BISHOP;
-								promotion = 'B';
-								Global::inPromotion = false;
-								break;
-							case 'N':
-								source->type = KNIGHT;
-								promotion = 'N';
-								Global::inPromotion = false;
-								break;
-							default:
-								std::cout << "INCORRECT OPTION\nCHOOSE AGAIN!\n";
-								showPieces
-								break;
+							std::cin >> choice;
+
+							switch (choice)
+							{
+								case 'Q':
+									source->type = QUEEN;
+									promotion = 'Q';
+									Global::inPromotion = false;
+									break;
+								case 'R':
+									source->type = ROOK;
+									promotion = 'R';
+									Global::inPromotion = false;
+									break;
+								case 'B':
+									source->type = BISHOP;
+									promotion = 'B';
+									Global::inPromotion = false;
+									break;
+								case 'N':
+									source->type = KNIGHT;
+									promotion = 'N';
+									Global::inPromotion = false;
+									break;
+								default:
+									std::cout << "INCORRECT OPTION\nCHOOSE AGAIN!\n";
+									showPieces
+									break;
+							}
 						}
 					}
 
