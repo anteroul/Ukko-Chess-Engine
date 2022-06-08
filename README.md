@@ -1,4 +1,4 @@
-# Ukko Chess Engine v0.1.5 alpha
+# Ukko Chess Engine v0.1.6 alpha
 
 #### Changes:
 - AI disabled

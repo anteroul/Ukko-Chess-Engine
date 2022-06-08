@@ -207,72 +207,57 @@ namespace Move
 		// pawn promotion
 		if (source->type == PAWN)
 		{
-			if (source->user == PLAYER)
+			// last row
+			if (target.y == 0 || target.y == 7)
 			{
-				// last row
-				if (target.y == 0)
+				std::cout << "PAWN GETS PROMOTED IN " << nameX << nameY << "\n";
+				std::cout << "CHOOSE PIECE:\n";
+				showPieces
+				char choice;
+				Global::inPromotion = true;
+				Piece *orig = source;
+
+				if (Global::inPromotion)
 				{
-					std::cout << "PLAYER PAWN GETS PROMOTED IN " << nameX << nameY << "\n";
-					std::cout << "CHOOSE PIECE:\n";
-					showPieces
-					char choice;
-					Global::inPromotion = true;
-					Piece *orig = source;
+					GUI::displayPromotionTable();
 
-					if (Global::inPromotion)
+					while (Global::inPromotion)
 					{
-						GUI::displayPromotionTable();
+						std::cin >> choice;
 
-						while (Global::inPromotion)
+						switch (choice)
 						{
-							std::cin >> choice;
-
-							switch (choice)
-							{
-								case 'Q':
-									source->type = QUEEN;
-									promotion = 'Q';
-									Global::inPromotion = false;
-									break;
-								case 'R':
-									source->type = ROOK;
-									promotion = 'R';
-									Global::inPromotion = false;
-									break;
-								case 'B':
-									source->type = BISHOP;
-									promotion = 'B';
-									Global::inPromotion = false;
-									break;
-								case 'N':
-									source->type = KNIGHT;
-									promotion = 'N';
-									Global::inPromotion = false;
-									break;
-								default:
-									std::cout << "INCORRECT OPTION\nCHOOSE AGAIN!\n";
-									showPieces
-									break;
-							}
+							case 'Q':
+								source->type = QUEEN;
+								promotion = 'Q';
+								Global::inPromotion = false;
+								break;
+							case 'R':
+								source->type = ROOK;
+								promotion = 'R';
+								Global::inPromotion = false;
+								break;
+							case 'B':
+								source->type = BISHOP;
+								promotion = 'B';
+								Global::inPromotion = false;
+								break;
+							case 'N':
+								source->type = KNIGHT;
+								promotion = 'N';
+								Global::inPromotion = false;
+								break;
+							default:
+								std::cout << "INCORRECT OPTION\nCHOOSE AGAIN!\n";
+								showPieces
+								break;
 						}
 					}
+				}
 
-					source->color = orig->color;
-					source->user = orig->user;
-					Global::inPromotion = false;
-				}
-			}
-			else
-			{
-				// engine always picks queen, at least for now
-				if (target.y == 7)
-				{
-					Piece *orig = source;
-					source->type = QUEEN;
-					source->color = orig->color;
-					source->user = orig->user;
-					promotion = 'Q';
-				}
+				source->color = orig->color;
+				source->user = orig->user;
+				Global::inPromotion = false;
 			}
 		}
 
