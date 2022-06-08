@@ -36,28 +36,5 @@ void GUI::displayPromotionTable()
 	SDL_SetRenderDrawColor(Renderer::get(), 128, 128, 128, 255);
 	SDL_RenderFillRect(Renderer::get(), rect);
 
-	if (Global::playerTurn)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			Renderer::setColor(255, 255, 128);
-			SDL_RenderFillRect(Renderer::get(),
-							   reinterpret_cast<const SDL_Rect *>(promotionButton[i].x, promotionButton[i].y, promotionButton[i].w, promotionButton[i].h));
-			SDL_RenderCopy(Renderer::get(), &promotionButton[i].icon, nullptr,
-						   reinterpret_cast<const SDL_Rect *>(promotionButton[i].x, promotionButton[i].y, promotionButton[i].w, promotionButton[i].h));
-		}
-	}
-	else
-	{
-		for (int i = 4; i < 8; i++)
-		{
-			Renderer::setColor(255, 255, 128);
-			SDL_RenderFillRect(Renderer::get(),
-							   reinterpret_cast<const SDL_Rect *>(promotionButton[i].x, promotionButton[i].y, promotionButton[i].w, promotionButton[i].h));
-			SDL_RenderCopy(Renderer::get(), &promotionButton[i].icon, nullptr,
-						   reinterpret_cast<const SDL_Rect *>(promotionButton[i].x, promotionButton[i].y, promotionButton[i].w, promotionButton[i].h));
-		}
-	}
-
 	delete rect;
 }

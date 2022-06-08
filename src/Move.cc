@@ -1,5 +1,4 @@
 #include "Move.hh"
-#include "GUI.hh"
 
 namespace Move
 {
@@ -200,64 +199,6 @@ namespace Move
 				if (source->x == 7)
 					Global::engineKsideRookMoved = true;
 
-			}
-		}
-
-
-		// pawn promotion
-		if (source->type == PAWN)
-		{
-			// last row
-			if (target.y == 0 || target.y == 7)
-			{
-				std::cout << "PAWN GETS PROMOTED IN " << nameX << nameY << "\n";
-				std::cout << "CHOOSE PIECE:\n";
-				showPieces
-				char choice;
-				Global::inPromotion = true;
-				Piece *orig = source;
-
-				if (Global::inPromotion)
-				{
-					GUI::displayPromotionTable();
-
-					while (Global::inPromotion)
-					{
-						std::cin >> choice;
-
-						switch (choice)
-						{
-							case 'Q':
-								source->type = QUEEN;
-								promotion = 'Q';
-								Global::inPromotion = false;
-								break;
-							case 'R':
-								source->type = ROOK;
-								promotion = 'R';
-								Global::inPromotion = false;
-								break;
-							case 'B':
-								source->type = BISHOP;
-								promotion = 'B';
-								Global::inPromotion = false;
-								break;
-							case 'N':
-								source->type = KNIGHT;
-								promotion = 'N';
-								Global::inPromotion = false;
-								break;
-							default:
-								std::cout << "INCORRECT OPTION\nCHOOSE AGAIN!\n";
-								showPieces
-								break;
-						}
-					}
-				}
-
-				source->color = orig->color;
-				source->user = orig->user;
-				Global::inPromotion = false;
 			}
 		}
 

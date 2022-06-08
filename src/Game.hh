@@ -13,7 +13,6 @@
 #include "Window.hh"
 #include "Pieces.hh"
 #include "Move.hh"
-#include "Engine.hh"
 #include "Global.hh"
 #include "Text.hh"
 #include "GameManager.hh"
@@ -48,7 +47,6 @@ private:
 	bool isPieceSelected = false;
 	void updateConsole();
 
-	Engine engine;
 	Board *board = nullptr;
 	PieceFactory *pieces = nullptr;
 	Window *window = nullptr;

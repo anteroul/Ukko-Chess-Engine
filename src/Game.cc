@@ -37,6 +37,47 @@ void Game::updateGame()
 
 void Game::eventHandler()
 {
+	if (Global::inPromotion)
+	{
+		std::cout << "PAWN GETS PROMOTED IN " << originalSquare->x << originalSquare->y << "\n";
+		std::cout << "CHOOSE PIECE:\n";
+		showPieces
+		char choice;
+		std::cin >> choice;
+
+		switch (choice)
+		{
+			case 'Q':
+				originalSquare->piece.type = QUEEN;
+				if (Global::playerTurn) Global::playerTurn = false;
+				else Global::playerTurn = true;
+				Global::inPromotion = false;
+				break;
+			case 'R':
+				originalSquare->piece.type = ROOK;
+				if (Global::playerTurn) Global::playerTurn = false;
+				else Global::playerTurn = true;
+				Global::inPromotion = false;
+				break;
+			case 'B':
+				originalSquare->piece.type = BISHOP;
+				if (Global::playerTurn) Global::playerTurn = false;
+				else Global::playerTurn = true;
+				Global::inPromotion = false;
+				break;
+			case 'K':
+				originalSquare->piece.type = KNIGHT;
+				if (Global::playerTurn) Global::playerTurn = false;
+				else Global::playerTurn = true;
+				Global::inPromotion = false;
+				break;
+			default:
+				std::cout << "INCORRECT OPTION\nCHOOSE AGAIN!\n";
+				showPieces
+				break;
+		}
+	}
+
 	while (SDL_PollEvent(&e))
 	{
 		// resize window
@@ -142,6 +183,9 @@ void Game::render()
 	for (int i = 0; i < 32; i++)
 		PieceRenderer::renderInPosition(Pieces::get(i));
 
+	if (Global::inPromotion)
+		GUI::displayPromotionTable();
+
 	// main rendering
 	Renderer::render();
 }
@@ -151,21 +195,44 @@ bool Game::moveSetup()
 	playerPieces.clear();
 	playerMoves.clear();
 
-	// "raw pieces"
-	for(int i = 16; i < 32; i++)
-		playerPieces.push_back(Pieces::get(i));
-
-	// loop all pieces
-	for(auto& i : playerPieces)
+	if (Global::playerTurn)
 	{
-		// filter pieces
-		if(i.type != NONE && i.user == PLAYER)
-		{
-			// get all legal moves
-			std::vector<Square> temp = LegalMove::getLegal(i);
+		// "raw pieces"
+		for (int i = 16; i < 32; i++)
+			playerPieces.push_back(Pieces::get(i));
 
-			for(auto& j : temp)
-				playerMoves.push_back(j);
+		// loop all pieces
+		for (auto &i: playerPieces)
+		{
+			// filter pieces
+			if (i.type != NONE && i.user == PLAYER)
+			{
+				// get all legal moves
+				std::vector<Square> temp = LegalMove::getLegal(i);
+
+				for (auto &j: temp)
+					playerMoves.push_back(j);
+			}
+		}
+	}
+	else
+	{
+		// "raw pieces"
+		for (int i = 0; i < 16; i++)
+			playerPieces.push_back(Pieces::get(i));
+
+		// loop all pieces
+		for (auto &i: playerPieces)
+		{
+			// filter pieces
+			if (i.type != NONE && i.user == ENGINE)
+			{
+				// get all legal moves
+				std::vector<Square> temp = LegalMove::getLegal(i);
+
+				for (auto &j: temp)
+					playerMoves.push_back(j);
+			}
 		}
 	}
 
@@ -200,38 +267,15 @@ void Game::playerPlayMove()
 	}
 }
 
-void Game::executePlayerMove(Square& sq)
-{
-	// loop players pieces to find the correct one
-	for (int i = 16; i < 32; i++)
-	{
-		// filter moves
-		if (Pieces::get(i).user == PLAYER && Pieces::get(i).type != NONE)
-		{
-			// loop pieces and find correct one
-			if (originalSquare == &Sqr::getSquare(Pieces::get(i).x, Pieces::get(i).y))
-			{
-				// make the move
-				Move::execute(&Pieces::get(i), sq);
-
-				legalMoves.clear();
-				isPieceSelected = false;
-				updateConsole();
-				Global::playerTurn = false;
-			}
-		}
-	}
-}
-
 // Engine's move:
 void Game::enginePlayMove()
 {
 	GameManager::update();
 
-	if(!engine.moveSetup())
+	if(!moveSetup())
 	{
-		if(Global::playerInCheck)
-			Global::state = DEFEAT;
+		if(Global::engineInCheck)
+			Global::state = VICTORY;
 		else
 			Global::state = DRAW;
 	}
@@ -244,13 +288,43 @@ void Game::enginePlayMove()
 			for (auto& i : legalMoves)
 			{
 				if (selectedSquare->x == i.x && selectedSquare->y == i.y)
-				{
-					engine.executeMove(originalSquare, i);
-					updateConsole();
-					Global::playerTurn = true;
-				}
+					executePlayerMove(i);
 				else
 					isPieceSelected = false;
+			}
+		}
+	}
+}
+
+void Game::executePlayerMove(Square& sq)
+{
+	// loop players pieces to find the correct one
+	for (int i = 0; i < 32; i++)
+	{
+		// filter moves
+		if ((Global::playerTurn && Pieces::get(i).user == PLAYER && Pieces::get(i).type != NONE)
+			|| (!Global::playerTurn && Pieces::get(i).user == ENGINE && Pieces::get(i).type != NONE))
+		{
+			// loop pieces and find correct one
+			if (originalSquare == &Sqr::getSquare(Pieces::get(i).x, Pieces::get(i).y))
+			{
+				// pawn promotion
+				if (originalSquare->piece.type == PAWN && sq.y == 0 || sq.y == 7)
+					Global::inPromotion = true;
+				// make the move
+				Move::execute(&Pieces::get(i), sq);
+
+				legalMoves.clear();
+				isPieceSelected = false;
+				updateConsole();
+
+				if (!Global::inPromotion)
+				{
+					if (Global::playerTurn)
+						Global::playerTurn = false;
+					else
+						Global::playerTurn = true;
+				}
 			}
 		}
 	}

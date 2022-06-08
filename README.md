@@ -1,8 +1,8 @@
-# Ukko Chess Engine v0.1.6 alpha
+# Ukko Chess Engine v0.2.0 alpha
 
 #### Changes:
-- AI disabled
-- Button struct
+- Removed engine class and moved second player functionality to game class
+- Moved pawn promotion to event handling to display GUI properly
 
 #### TODO:
 - Implement online multiplayer
