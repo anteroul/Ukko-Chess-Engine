@@ -69,7 +69,6 @@ namespace Move
 	{
 		name = "";
 		nameSource = "";
-		promotion = "";
 
 		switch (source->type)
 		{

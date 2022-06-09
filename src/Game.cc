@@ -84,13 +84,13 @@ void Game::eventHandler()
 		// pawn promotion
 		if (Global::inPromotion)
 		{
-			Piece* pieceToPromote = nullptr;
+			Piece* pieceToPromote;
 			// loop players pieces to find the correct one
 			for (int i = 0; i < 32; i++)
 			{
 				if (Pieces::get(i).type == PAWN && (Pieces::get(i).y == 0 || Pieces::get(i).y == 7))
 				{
-					pieceToPromote = &Pieces::get(i);
+					pieceToPromote = Pieces::getModify(i);
 					break;
 				}
 			}
@@ -122,8 +122,6 @@ void Game::eventHandler()
 					showPieces
 					break;
 			}
-
-			pieceToPromote = nullptr;
 		}
 
 		// if game is over press 'R' to reset and play again :)
@@ -312,7 +310,8 @@ void Game::executePlayerMove(Square& sq)
 			if (originalSquare == &Sqr::getSquare(Pieces::get(i).x, Pieces::get(i).y))
 			{
 				// pawn promotion
-				if (originalSquare->piece.type == PAWN && sq.y == 0 || sq.y == 7)
+				if ((Pieces::get(i).type == PAWN && Pieces::get(i).user == PLAYER && (sq.y == 0 || sq.y == 7) && Global::playerTurn)
+				|| (Pieces::get(i).type == PAWN && Pieces::get(i).user == ENGINE && (sq.y == 0 || sq.y == 7) && !Global::playerTurn))
 					Global::inPromotion = true;
 
 				// make the move
