@@ -37,47 +37,6 @@ void Game::updateGame()
 
 void Game::eventHandler()
 {
-	if (Global::inPromotion)
-	{
-		std::cout << "PAWN GETS PROMOTED IN " << originalSquare->x << originalSquare->y << "\n";
-		std::cout << "CHOOSE PIECE:\n";
-		showPieces
-		char choice;
-		std::cin >> choice;
-
-		switch (choice)
-		{
-			case 'Q':
-				originalSquare->piece.type = QUEEN;
-				if (Global::playerTurn) Global::playerTurn = false;
-				else Global::playerTurn = true;
-				Global::inPromotion = false;
-				break;
-			case 'R':
-				originalSquare->piece.type = ROOK;
-				if (Global::playerTurn) Global::playerTurn = false;
-				else Global::playerTurn = true;
-				Global::inPromotion = false;
-				break;
-			case 'B':
-				originalSquare->piece.type = BISHOP;
-				if (Global::playerTurn) Global::playerTurn = false;
-				else Global::playerTurn = true;
-				Global::inPromotion = false;
-				break;
-			case 'K':
-				originalSquare->piece.type = KNIGHT;
-				if (Global::playerTurn) Global::playerTurn = false;
-				else Global::playerTurn = true;
-				Global::inPromotion = false;
-				break;
-			default:
-				std::cout << "INCORRECT OPTION\nCHOOSE AGAIN!\n";
-				showPieces
-				break;
-		}
-	}
-
 	while (SDL_PollEvent(&e))
 	{
 		// resize window
@@ -120,6 +79,51 @@ void Game::eventHandler()
 					isPieceSelected = true;
 				}
 			}
+		}
+
+		// pawn promotion
+		if (Global::inPromotion)
+		{
+			Piece* pieceToPromote = nullptr;
+			// loop players pieces to find the correct one
+			for (int i = 0; i < 32; i++)
+			{
+				if (Pieces::get(i).type == PAWN && (Pieces::get(i).y == 0 || Pieces::get(i).y == 7))
+				{
+					pieceToPromote = &Pieces::get(i);
+					break;
+				}
+			}
+			std::cout << "CHOOSE PIECE:\n";
+			showPieces
+			char choice;
+			std::cin >> choice;
+
+			switch (choice)
+			{
+				case 'Q':
+					pieceToPromote->type = QUEEN;
+					Global::inPromotion = false;
+					break;
+				case 'R':
+					pieceToPromote->type = ROOK;
+					Global::inPromotion = false;
+					break;
+				case 'B':
+					pieceToPromote->type = BISHOP;
+					Global::inPromotion = false;
+					break;
+				case 'K':
+					pieceToPromote->type = KNIGHT;
+					Global::inPromotion = false;
+					break;
+				default:
+					std::cout << "INCORRECT OPTION\nCHOOSE AGAIN!\n";
+					showPieces
+					break;
+			}
+
+			pieceToPromote = nullptr;
 		}
 
 		// if game is over press 'R' to reset and play again :)
@@ -305,26 +309,22 @@ void Game::executePlayerMove(Square& sq)
 		if ((Global::playerTurn && Pieces::get(i).user == PLAYER && Pieces::get(i).type != NONE)
 			|| (!Global::playerTurn && Pieces::get(i).user == ENGINE && Pieces::get(i).type != NONE))
 		{
-			// loop pieces and find correct one
 			if (originalSquare == &Sqr::getSquare(Pieces::get(i).x, Pieces::get(i).y))
 			{
 				// pawn promotion
 				if (originalSquare->piece.type == PAWN && sq.y == 0 || sq.y == 7)
 					Global::inPromotion = true;
+
 				// make the move
 				Move::execute(&Pieces::get(i), sq);
-
 				legalMoves.clear();
 				isPieceSelected = false;
 				updateConsole();
 
-				if (!Global::inPromotion)
-				{
-					if (Global::playerTurn)
-						Global::playerTurn = false;
-					else
-						Global::playerTurn = true;
-				}
+				if (Global::playerTurn)
+					Global::playerTurn = false;
+				else
+					Global::playerTurn = true;
 			}
 		}
 	}
