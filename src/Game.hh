@@ -18,6 +18,7 @@
 #include "GameManager.hh"
 #include <chrono>
 #include <thread>
+#include <iomanip>
 
 class Game
 {
