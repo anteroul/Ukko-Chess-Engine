@@ -11,8 +11,8 @@ PieceFactory::PieceFactory()
 	}
 	for (int i = 0; i < ARRSIZE(b); i++)
 	{
-		if (Texture::load(bIcon[i]))
-			b[i] = Texture::load(bIcon[i]);
+		if (Texture::load(btn_src[i]))
+			b[i] = Texture::load(btn_src[i]);
 		else
 			b[i] = Texture::load("../" + c[i]);
 	}
@@ -21,7 +21,7 @@ PieceFactory::PieceFactory()
 PieceFactory::~PieceFactory()
 {
 	for (auto &i: p) SDL_DestroyTexture(i);
-	for (auto &i: bIcon) SDL_DestroyTexture(i);
+	for (auto &i: b) SDL_DestroyTexture(i);
 }
 
 SDL_Texture *PieceFactory::getPiece(int n)

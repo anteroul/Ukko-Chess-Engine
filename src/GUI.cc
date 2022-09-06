@@ -3,14 +3,14 @@
 PieceFactory factory;
 
 static Button promotionButton[8] = {
-		QUEEN, static_cast<int>(Screen::getWidth() * 0.3f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(2),
-		KNIGHT, static_cast<int>(Screen::getWidth() * 0.4f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(1),
-		ROOK, static_cast<int>(Screen::getWidth() * 0.5f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(3),
-		BISHOP, static_cast<int>(Screen::getWidth() * 0.6f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(0),
-		QUEEN, static_cast<int>(Screen::getWidth() * 0.3f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(2),
-		KNIGHT, static_cast<int>(Screen::getWidth() * 0.4f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(1),
-		ROOK, static_cast<int>(Screen::getWidth() * 0.5f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(3),
-		BISHOP, static_cast<int>(Screen::getWidth() * 0.6f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getPiece(0)
+		QUEEN, static_cast<Sint16>(static_cast<int>(Screen::getWidth() * 0.3f)), static_cast<Sint16>(Screen::getHeight() / 2), static_cast<Uint16>(Screen::getWidth() / 8), static_cast<Uint16>(Screen::getHeight() / 6), *factory.getButton(2),
+		KNIGHT, static_cast<Sint16>(static_cast<int>(Screen::getWidth() * 0.4f)), static_cast<Sint16>(Screen::getHeight() / 2), static_cast<Uint16>(Screen::getWidth() / 8), static_cast<Uint16>(Screen::getHeight() / 6), *factory.getButton(1),
+		ROOK, static_cast<Sint16>(static_cast<int>(Screen::getWidth() * 0.5f)), static_cast<Sint16>(Screen::getHeight() / 2), static_cast<Uint16>(Screen::getWidth() / 8), static_cast<Uint16>(Screen::getHeight() / 6), *factory.getButton(3),
+		BISHOP, static_cast<Sint16>(static_cast<int>(Screen::getWidth() * 0.6f)), static_cast<Sint16>(Screen::getHeight() / 2), static_cast<Uint16>(Screen::getWidth() / 8), static_cast<Uint16>(Screen::getHeight() / 6), *factory.getButton(0),
+		QUEEN, static_cast<Sint16>(static_cast<int>(Screen::getWidth() * 0.3f)), static_cast<Sint16>(Screen::getHeight() / 2), static_cast<Uint16>(Screen::getWidth() / 8), static_cast<Uint16>(Screen::getHeight() / 6), *factory.getButton(2),
+		KNIGHT, static_cast<Sint16>(static_cast<int>(Screen::getWidth() * 0.4f)), static_cast<Sint16>(Screen::getHeight() / 2), static_cast<Uint16>(Screen::getWidth() / 8), static_cast<Uint16>(Screen::getHeight() / 6), *factory.getButton(1),
+		ROOK, static_cast<Sint16>(static_cast<int>(Screen::getWidth() * 0.5f)), static_cast<Sint16>(Screen::getHeight() / 2), static_cast<Uint16>(Screen::getWidth() / 8), static_cast<Uint16>(Screen::getHeight() / 6), *factory.getButton(3),
+		BISHOP, static_cast<Sint16>(static_cast<int>(Screen::getWidth() * 0.6f)), static_cast<Sint16>(Screen::getHeight() / 2), static_cast<Uint16>(Screen::getWidth() / 8), static_cast<Uint16>(Screen::getHeight() / 6), *factory.getPiece(0)
 };
 
 bool GUI::onMouseRollOver(SDL_Point &mousePos, SDL_Rect &square)
@@ -36,15 +36,30 @@ void GUI::displayPromotionTable()
 	SDL_SetRenderDrawColor(Renderer::get(), 128, 128, 128, 255);
 	SDL_RenderFillRect(Renderer::get(), rect);
 	GUI::renderTableButtons();
+	if (!Global::playerTurn)
+	{
+		for (int i = 0; i < 4; i++)
+			SDL_RenderCopy(Renderer::get(), &promotionButton[i].icon, nullptr, (const SDL_Rect*) (promotionButton[i].x, promotionButton[i].y, promotionButton[i].w, promotionButton[i].h));
+	}
+	else
+	{
+		for (int i = 4; i < 8; i++)
+			SDL_RenderCopy(Renderer::get(), &promotionButton[i].icon, nullptr, (const SDL_Rect*) (promotionButton[i].x, promotionButton[i].y, promotionButton[i].w, promotionButton[i].h));
+	}
 	
 	delete rect;
 }
 
 void GUI::renderTableButtons()
 {
-	if (Global::playerTurn)
+	if (!Global::playerTurn)
 	{
 		for (int i = 0; i < 4; i++)
-			SDL_RenderCopy(Renderer::get(), promotionButton[i]);
+			SDL_RenderCopy(Renderer::get(), &promotionButton[i].icon, nullptr, (const SDL_Rect*) (promotionButton[i].x, promotionButton[i].y, promotionButton[i].w, promotionButton[i].h));
+	}
+	else
+	{
+		for (int i = 4; i < 8; i++)
+			SDL_RenderCopy(Renderer::get(), &promotionButton[i].icon, nullptr, (const SDL_Rect*) (promotionButton[i].x, promotionButton[i].y, promotionButton[i].w, promotionButton[i].h));
 	}
 }

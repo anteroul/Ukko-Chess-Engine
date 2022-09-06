@@ -7,7 +7,8 @@
 
 typedef struct Button {
 	Type value;
-	int x, y, w, h;
+	Sint16 x, y;
+	Uint16 w, h;
 	SDL_Texture& icon;
 } Button;
 

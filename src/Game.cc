@@ -84,6 +84,7 @@ void Game::eventHandler()
 		// pawn promotion
 		if (Global::inPromotion)
 		{
+			/*
 			Piece* pieceToPromote;
 			// loop players pieces to find the correct one
 			for (int i = 0; i < 32; i++)
@@ -122,6 +123,7 @@ void Game::eventHandler()
 					showPieces
 					break;
 			}
+			*/
 		}
 
 		// if game is over press 'R' to reset and play again :)

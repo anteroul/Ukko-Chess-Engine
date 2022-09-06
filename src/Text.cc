@@ -1,5 +1,4 @@
 #include <utility>
-
 #include "Text.hh"
 
 

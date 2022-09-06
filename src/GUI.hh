@@ -5,6 +5,7 @@
 #include "Square.hh"
 #include "SquareManager.hh"
 #include "ScreenSize.hh"
+#include "PieceFactory.hh"
 #include "Renderer.hh"
 #include "Button.hh"
 #include "Global.hh"
