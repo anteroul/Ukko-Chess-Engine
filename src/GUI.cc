@@ -3,13 +3,13 @@
 PieceFactory factory;
 
 static Button promotionButton[8] = {
-		QUEEN, static_cast<int>(Screen::getWidth() * 0.3f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getPiece(10),
-		KNIGHT, static_cast<int>(Screen::getWidth() * 0.4f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getPiece(7),
-		ROOK, static_cast<int>(Screen::getWidth() * 0.5f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getPiece(11),
-		BISHOP, static_cast<int>(Screen::getWidth() * 0.6f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getPiece(6),
-		QUEEN, static_cast<int>(Screen::getWidth() * 0.3f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getPiece(4),
-		KNIGHT, static_cast<int>(Screen::getWidth() * 0.4f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getPiece(1),
-		ROOK, static_cast<int>(Screen::getWidth() * 0.5f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getPiece(5),
+		QUEEN, static_cast<int>(Screen::getWidth() * 0.3f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(2),
+		KNIGHT, static_cast<int>(Screen::getWidth() * 0.4f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(1),
+		ROOK, static_cast<int>(Screen::getWidth() * 0.5f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(3),
+		BISHOP, static_cast<int>(Screen::getWidth() * 0.6f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(0),
+		QUEEN, static_cast<int>(Screen::getWidth() * 0.3f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(2),
+		KNIGHT, static_cast<int>(Screen::getWidth() * 0.4f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(1),
+		ROOK, static_cast<int>(Screen::getWidth() * 0.5f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getButton(3),
 		BISHOP, static_cast<int>(Screen::getWidth() * 0.6f), Screen::getHeight() / 2, Screen::getWidth() / 8, Screen::getHeight() / 6, *factory.getPiece(0)
 };
 
@@ -35,6 +35,16 @@ void GUI::displayPromotionTable()
 
 	SDL_SetRenderDrawColor(Renderer::get(), 128, 128, 128, 255);
 	SDL_RenderFillRect(Renderer::get(), rect);
-
+	GUI::renderTableButtons();
+	
 	delete rect;
+}
+
+void GUI::renderTableButtons()
+{
+	if (Global::playerTurn)
+	{
+		for (int i = 0; i < 4; i++)
+			SDL_RenderCopy(Renderer::get(), promotionButton[i]);
+	}
 }
