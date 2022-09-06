@@ -21,26 +21,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09a878db-4e0e-48e9-8ed4-f0846f847e5b" name="Changes" comment="button icons">
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cache-v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/codemodel-v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/toolchains-v1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-1833a6f4d7fb8213dcb4.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-2cef7851a31f97230d63.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-f5ebdc15457944623624.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-UkkoShakki-Debug-6d0abee225f40c4410fc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-ee5ca47e57a615ee224c.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Button.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/Button.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PieceFactory.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PieceFactory.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Text.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/Text.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +59,6 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
@@ -94,17 +76,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;language.cpp.clang-tidy&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src" />
-    </key>
-  </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="UkkoShakki" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="UkkoShakki" TARGET_NAME="UkkoShakki" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="UkkoShakki" RUN_TARGET_NAME="UkkoShakki">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -142,9 +114,7 @@
       <workItem from="1662390594009" duration="687000" />
       <workItem from="1662393223763" duration="985000" />
       <workItem from="1662405985596" duration="81000" />
-      <workItem from="1662427577728" duration="6170000" />
-      <workItem from="1662433870173" duration="192000" />
-      <workItem from="1662434077043" duration="1138000" />
+      <workItem from="1662427577728" duration="1000" />
     </task>
     <task id="LOCAL-00001" summary="AI disabled">
       <created>1654610348646</created>
