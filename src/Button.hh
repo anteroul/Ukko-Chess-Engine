@@ -5,11 +5,11 @@
 #include "SDL2/SDL_image.h"
 #include "Piece.hh"
 
-typedef struct Button {
+struct Button {
 	Type value;
 	Sint16 x, y;
 	Uint16 w, h;
 	SDL_Texture& icon;
-} Button;
+};
 
 #endif //UKKOSHAKKI_BUTTON_HH
