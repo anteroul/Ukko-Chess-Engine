@@ -21,26 +21,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09a878db-4e0e-48e9-8ed4-f0846f847e5b" name="Changes" comment="button icons">
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cache-v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/codemodel-v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/toolchains-v1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-1833a6f4d7fb8213dcb4.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-2cef7851a31f97230d63.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-f5ebdc15457944623624.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-UkkoShakki-Debug-6d0abee225f40c4410fc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-ee5ca47e57a615ee224c.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Button.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-1833a6f4d7fb8213dcb4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-2cef7851a31f97230d63.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-UkkoShakki-Debug-6d0abee225f40c4410fc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-ee5ca47e57a615ee224c.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Button.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/Button.hh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PieceFactory.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PieceFactory.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Text.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/Text.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.hh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Global.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/Global.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Global.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/Global.hh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LegalMoves.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/LegalMoves.hh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Piece.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.hh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +92,8 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;language.cpp.clang-tidy&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -100,12 +102,12 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="UkkoShakki" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="UkkoShakki" TARGET_NAME="UkkoShakki" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="UkkoShakki" RUN_TARGET_NAME="UkkoShakki">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UkkoShakki" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="UkkoShakki" TARGET_NAME="UkkoShakki" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="UkkoShakki" RUN_TARGET_NAME="UkkoShakki">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -145,6 +147,10 @@
       <workItem from="1662427577728" duration="6170000" />
       <workItem from="1662433870173" duration="192000" />
       <workItem from="1662434077043" duration="1138000" />
+      <workItem from="1673634489384" duration="86000" />
+      <workItem from="1673634593582" duration="1285000" />
+      <workItem from="1673650372336" duration="5412000" />
+      <workItem from="1673660449297" duration="19857000" />
     </task>
     <task id="LOCAL-00001" summary="AI disabled">
       <created>1654610348646</created>

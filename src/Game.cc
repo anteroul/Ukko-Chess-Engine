@@ -17,6 +17,19 @@ Game::Game()
 	// initialize pieces in their correct places
 	Pieces::init();
 
+	// initialize promotion table buttons:
+	Button button[4] {
+		Button(pieces, BISHOP),
+		Button(pieces, KNIGHT),
+		Button(pieces, QUEEN),
+		Button(pieces, ROOK)
+	};
+
+	for (auto i : button)
+	{
+		buttons.push_back(&i);
+	}
+
 	// white starts game
 	Settings::PlayerColor == WHITE ? Global::playerTurn = true : Global::playerTurn = false;
 }
@@ -187,8 +200,11 @@ void Game::render()
 	for (int i = 0; i < 32; i++)
 		PieceRenderer::renderInPosition(Pieces::get(i));
 
+	// show GUI promotion table
 	if (Global::inPromotion)
-		GUI::displayPromotionTable();
+	{
+		GUI::renderTableButtons(buttons);
+	}
 
 	// main rendering
 	Renderer::render();

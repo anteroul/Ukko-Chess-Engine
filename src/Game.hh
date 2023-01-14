@@ -1,6 +1,7 @@
 #ifndef GAME_HH
 #define GAME_HH
 
+#include "Button.hh"
 #include "Board.hh"
 #include "GUI.hh"
 #include "LegalMoves.hh"
@@ -40,9 +41,10 @@ private:
 	std::vector<Square> playerMoves;
 	std::vector<Square> legalMoves;
 	std::vector<Piece> playerPieces;
+	std::vector<Button*> buttons;
 
 	// console stuff
-	std::vector<Text *> console;
+	std::vector<Text*> console;
 	int consoleIndex = 0;
 	bool isPieceSelected = false;
 	void updateConsole();

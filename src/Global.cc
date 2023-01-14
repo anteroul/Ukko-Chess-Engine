@@ -1,12 +1,11 @@
 #include "Global.hh"
 
-currentGameState Global::state = GAME_ON;
-
 Piece ghost(int x, int y)
 {
 	return { NONE, UNDEFINED, x, y, GHOST };
 }
 
+currentGameState Global::state = GAME_ON;
 bool Global::playerTurn = true;
 
 Square* Global::en_passant = nullptr;

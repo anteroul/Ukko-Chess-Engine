@@ -5,19 +5,18 @@
 #include "Square.hh"
 #include "SquareManager.hh"
 #include "ScreenSize.hh"
-#include "PieceFactory.hh"
 #include "Renderer.hh"
 #include "Button.hh"
-#include "Global.hh"
+#include <vector>
 
 class GUI
 {
 public:
 	static bool onMouseRollOver(SDL_Point &mousePos, SDL_Rect &square);
 	static Square *onSelect(SDL_Point &mousePos);
-	static void displayPromotionTable();
+	static void renderTableButtons(const std::vector<Button*> &btn);
 private:
-	static void renderTableButtons();
+	static void displayPromotionTable();
 };
 
 

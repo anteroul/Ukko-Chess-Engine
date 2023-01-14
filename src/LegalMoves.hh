@@ -5,7 +5,6 @@
 #include "SquareManager.hh"
 #include "Piece.hh"
 #include "Global.hh"
-#include "Global.hh"
 #include "Settings.hh"
 #include "Pieces.hh"
 #include "Move.hh"

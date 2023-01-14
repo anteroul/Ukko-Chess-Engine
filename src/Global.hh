@@ -9,12 +9,11 @@
 // return ghost struct
 Piece ghost(int x, int y);
 
-enum { GAME_ON, VICTORY, DEFEAT, DRAW, END } currentGameState;
+enum currentGameState { GAME_ON, VICTORY, DEFEAT, DRAW, END };
 
 class Global
 {
 	public:
-
 		// 1 ENGINE WIN -- -1 ENGINE LOSE
 		[[maybe_unused]] static double evaluation;
 

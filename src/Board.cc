@@ -49,7 +49,7 @@ void Board::makeRects()
 	dstrect.y = 0;
 
 	// leave space on the right
-	dstrect.w = Screen::getWidth() * 0.8f;
+	dstrect.w = Screen::getWidth() / 5 * 4;
 	dstrect.h = Screen::getHeight();
 }
 
