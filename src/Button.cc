@@ -52,3 +52,8 @@ SDL_Texture *Button::getButtonTexture()
 {
 	return icon;
 }
+
+SDL_Rect Button::getRect()
+{
+	return { x, y, w, h };
+}

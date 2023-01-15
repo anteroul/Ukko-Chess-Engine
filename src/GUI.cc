@@ -1,7 +1,5 @@
 #include "GUI.hh"
 
-int SDL_RenderCopy(SDL_Renderer *pRenderer, nullptr_t pVoid, const SDL_Rect *pRect);
-
 bool GUI::onMouseRollOver(SDL_Point &mousePos, SDL_Rect &square)
 {
 	return SDL_PointInRect(&mousePos, &square);
@@ -18,20 +16,16 @@ Square *GUI::onSelect(SDL_Point &mousePos)
 		return &Sqr::getSquare(7, y);
 }
 
-void GUI::displayPromotionTable()
+void GUI::displayPromotionTable(const std::vector<Button*> &btn)
 {
 	auto rect = new SDL_Rect {Screen::getWidth() / 8, Screen::getHeight() / 5, static_cast<int>(Screen::getWidth() * 0.75f), Screen::getHeight() / 2};
 
 	SDL_SetRenderDrawColor(Renderer::get(), 128, 128, 128, 255);
 	SDL_RenderFillRect(Renderer::get(), rect);
-}
 
-void GUI::renderTableButtons(const std::vector<Button*> &btn)
-{
-	displayPromotionTable();
-
-	/*for (auto & i : btn)
-		SDL_RenderCopy(Renderer::get(), nullptr,
-					   (const SDL_Rect *) (i->getButtonTexture(), i->getButtonTexture(), i->getButtonTexture(), i->getButtonTexture()));
-					   */
+	for (auto & i : btn)
+	{
+		SDL_Rect r = i->getRect();
+		SDL_RenderCopy(Renderer::get(), i->getButtonTexture(), nullptr, &r);
+	}
 }

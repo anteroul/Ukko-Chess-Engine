@@ -7,10 +7,12 @@
 #include "PieceFactory.hh"
 #include "Global.hh"
 
-class Button {
+class Button
+{
 public:
 	Button(PieceFactory* factory, Type value);
 	SDL_Texture* getButtonTexture();
+	SDL_Rect getRect();
 private:
 	Sint16 x, y;
 	Uint16 w, h;

@@ -203,7 +203,7 @@ void Game::render()
 	// show GUI promotion table
 	if (Global::inPromotion)
 	{
-		GUI::renderTableButtons(buttons);
+		GUI::displayPromotionTable(buttons);
 	}
 
 	// main rendering
