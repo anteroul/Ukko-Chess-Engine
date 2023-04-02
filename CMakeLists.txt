@@ -28,7 +28,6 @@ add_executable(UkkoShakki
         src/GameManager.cc
         src/MinMax.cc
         src/SquareCopy.cc
-        src/Button.hh
-        src/Button.cc)
+        )
 
 target_link_libraries(UkkoShakki ${SDL2_LIBRARIES} -lSDL2_image -lSDL2_ttf)

@@ -9,8 +9,8 @@ namespace Sqr
 	{
 		if((x >= 0) && (x < 8) && (y >= 0) && (y < 8))
 			return &getSquare(x, y);
-		else
-			return nullptr;
+
+        return nullptr;
 	}
 
 	Square& getSquare(int x, int y) { return squares[x][y]; }

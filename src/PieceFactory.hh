@@ -15,7 +15,6 @@ class PieceFactory
 
 		// get texture
 		SDL_Texture* getPiece(int n);
-		SDL_Texture* getButton(int n);
 
 	private:
 		
@@ -37,19 +36,6 @@ class PieceFactory
 			"Assets/wp.png",
 			"Assets/wq.png",
 			"Assets/wr.png"
-		};
-
-		// the button icons
-		std::string btn_src[8] =
-		{
-			"Assets/bb_btn.png",
-			"Assets/bh_btn.png",
-			"Assets/bq_btn.png",
-			"Assets/br_btn.png",
-			"Assets/wb_btn.png",
-			"Assets/wh_btn.png",
-			"Assets/wq_btn.png",
-			"Assets/wr_btn.png"
 		};
 };
 

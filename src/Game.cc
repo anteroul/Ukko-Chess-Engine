@@ -17,18 +17,9 @@ Game::Game()
 	// initialize pieces in their correct places
 	Pieces::init();
 
-	// initialize promotion table buttons:
-	Button button[4] {
-		Button(pieces, BISHOP),
-		Button(pieces, KNIGHT),
-		Button(pieces, QUEEN),
-		Button(pieces, ROOK)
-	};
-
-	for (auto i : button)
-	{
-		buttons.push_back(&i);
-	}
+    // displays during pawn promotion
+    promotionTable = {Screen::getWidth() / 8, Screen::getHeight() / 5, (Screen::getWidth() / 4 * 3), Screen::getHeight() / 2};
+    promotionTableTooltips = Texture::load("../Assets/PromotionTable.png");
 
 	// white starts game
 	Settings::PlayerColor == WHITE ? Global::playerTurn = true : Global::playerTurn = false;
@@ -36,6 +27,7 @@ Game::Game()
 
 Game::~Game()
 {
+    SDL_DestroyTexture(promotionTableTooltips);
 	delete pieces;
 	delete board;
 	delete window;
@@ -66,78 +58,45 @@ void Game::eventHandler()
 			SDL_GetMouseState(&mousePos.x, &mousePos.y);
 		}
 
-		// when mouse is clicked
-		if (e.type == SDL_MOUSEBUTTONDOWN)
-		{
-			// get mouse position
-			SDL_GetMouseState(&mousePos.x, &mousePos.y);
-			selectedSquare = GUI::onSelect(mousePos);
+        if (!Global::inPromotion) {
+            // when mouse is clicked
+            if (e.type == SDL_MOUSEBUTTONDOWN) {
+                // get mouse position
+                SDL_GetMouseState(&mousePos.x, &mousePos.y);
+                selectedSquare = GUI::onSelect(mousePos);
 
-			// render possible moves
-			if (Global::playerTurn)
-			{
-				if (selectedSquare->piece.type != NONE && selectedSquare->piece.user == PLAYER)
-				{
-					originalSquare = selectedSquare;
-					legalMoves = LegalMove::getLegal(originalSquare->piece);
-					isPieceSelected = true;
-				}
-			}
-			else
-			{
-				if (selectedSquare->piece.type != NONE && selectedSquare->piece.user == ENGINE)
-				{
-					originalSquare = selectedSquare;
-					legalMoves = LegalMove::getLegal(originalSquare->piece);
-					isPieceSelected = true;
-				}
-			}
-		}
-
-		// pawn promotion
-		if (Global::inPromotion)
-		{
-			/*
-			Piece* pieceToPromote;
-			// loop players pieces to find the correct one
-			for (int i = 0; i < 32; i++)
-			{
-				if (Pieces::get(i).type == PAWN && (Pieces::get(i).y == 0 || Pieces::get(i).y == 7))
-				{
-					pieceToPromote = Pieces::getModify(i);
-					break;
-				}
-			}
-			std::cout << "CHOOSE PIECE:\n";
-			showPieces
-			char choice;
-			std::cin >> choice;
-
-			switch (choice)
-			{
-				case 'Q':
-					pieceToPromote->type = QUEEN;
-					Global::inPromotion = false;
-					break;
-				case 'R':
-					pieceToPromote->type = ROOK;
-					Global::inPromotion = false;
-					break;
-				case 'B':
-					pieceToPromote->type = BISHOP;
-					Global::inPromotion = false;
-					break;
-				case 'K':
-					pieceToPromote->type = KNIGHT;
-					Global::inPromotion = false;
-					break;
-				default:
-					std::cout << "INCORRECT OPTION\nCHOOSE AGAIN!\n";
-					showPieces
-					break;
-			}
-			*/
-		}
+                // render possible moves
+                if (Global::playerTurn) {
+                    if (selectedSquare->piece.type != NONE && selectedSquare->piece.user == PLAYER) {
+                        originalSquare = selectedSquare;
+                        legalMoves = LegalMove::getLegal(originalSquare->piece);
+                        isPieceSelected = true;
+                    }
+                } else {
+                    if (selectedSquare->piece.type != NONE && selectedSquare->piece.user == ENGINE) {
+                        originalSquare = selectedSquare;
+                        legalMoves = LegalMove::getLegal(originalSquare->piece);
+                        isPieceSelected = true;
+                    }
+                }
+            }
+        } else {
+            if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_1)
+                Pieces::getReal(&selectedSquare->piece).type = QUEEN;
+            if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_2)
+                Pieces::getReal(&selectedSquare->piece).type = ROOK;
+            if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_3)
+                Pieces::getReal(&selectedSquare->piece).type = KNIGHT;
+            if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_4)
+                Pieces::getReal(&selectedSquare->piece).type = BISHOP;
+            if (selectedSquare->piece.type != PAWN) {
+                Global::inPromotion = false;
+                if (Global::playerTurn)
+                    Global::playerTurn = false;
+                else
+                    Global::playerTurn = true;
+            }
+        }
 
 		// if game is over press 'R' to reset and play again :)
 		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_r)
@@ -159,8 +118,7 @@ void Game::render()
 	Renderer::clear();
 
 	// render console
-	for (auto & i : console)
-		if (i)
+	for (auto & i : console)		if (i)
 			i->render();
 
 	// render board
@@ -203,7 +161,11 @@ void Game::render()
 	// show GUI promotion table
 	if (Global::inPromotion)
 	{
-		GUI::displayPromotionTable(buttons);
+        promotionTable = {Screen::getWidth() / 8, Screen::getHeight() / 5, (Screen::getWidth() / 4 * 3), Screen::getHeight() / 2};
+        SDL_RenderDrawRect(Renderer::get(), &promotionTable);
+        SDL_SetRenderDrawColor(Renderer::get(), 128, 128, 128, 255);
+        SDL_RenderFillRect(Renderer::get(), &promotionTable);
+        SDL_RenderCopy(Renderer::get(), promotionTableTooltips, nullptr, &promotionTable);
 	}
 
 	// main rendering
@@ -335,13 +297,17 @@ void Game::executePlayerMove(Square& sq)
 				// make the move
 				Move::execute(&Pieces::get(i), sq);
 				legalMoves.clear();
-				isPieceSelected = false;
-				updateConsole();
+                updateConsole();
 
-				if (Global::playerTurn)
-					Global::playerTurn = false;
-				else
-					Global::playerTurn = true;
+                if(!Global::inPromotion)
+                {
+                    isPieceSelected = false;
+
+                    if (Global::playerTurn)
+                        Global::playerTurn = false;
+                    else
+                        Global::playerTurn = true;
+                }
 			}
 		}
 	}

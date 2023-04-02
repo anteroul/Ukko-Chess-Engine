@@ -21,15 +21,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09a878db-4e0e-48e9-8ed4-f0846f847e5b" name="Changes" comment="button icons">
+      <change afterPath="$PROJECT_DIR$/Assets/PromotionTable.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Buttons/bb_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Buttons/bh_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Buttons/bq_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Buttons/br_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Buttons/wb_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Buttons/wh_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Buttons/wq_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Buttons/wr_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Button.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/Button.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Button.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/Button.hh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Button.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Button.hh" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.hh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.hh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PieceFactory.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PieceFactory.hh" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory.hh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SquareManager.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/SquareManager.cc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +106,11 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="UkkoShakki" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="UkkoShakki" TARGET_NAME="UkkoShakki" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="UkkoShakki" RUN_TARGET_NAME="UkkoShakki">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -138,6 +159,8 @@
       <workItem from="1673802253802" duration="3578000" />
       <workItem from="1673813221604" duration="1191000" />
       <workItem from="1673815101192" duration="879000" />
+      <workItem from="1680457226076" duration="127000" />
+      <workItem from="1680457356054" duration="11548000" />
     </task>
     <task id="LOCAL-00001" summary="AI disabled">
       <created>1654610348646</created>
@@ -236,17 +259,6 @@
     <MESSAGE value="pawn promotion working again" />
     <MESSAGE value="button icons" />
     <option name="LAST_COMMIT_MESSAGE" value="button icons" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/Button.cc</url>
-          <line>22</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

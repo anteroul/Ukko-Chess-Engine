@@ -1,7 +1,6 @@
 #ifndef GAME_HH
 #define GAME_HH
 
-#include "Button.hh"
 #include "Board.hh"
 #include "GUI.hh"
 #include "LegalMoves.hh"
@@ -17,6 +16,7 @@
 #include "Global.hh"
 #include "Text.hh"
 #include "GameManager.hh"
+#include "Texture.hh"
 #include <chrono>
 #include <thread>
 
@@ -41,7 +41,6 @@ private:
 	std::vector<Square> playerMoves;
 	std::vector<Square> legalMoves;
 	std::vector<Piece> playerPieces;
-	std::vector<Button*> buttons;
 
 	// console stuff
 	std::vector<Text*> console;
@@ -56,6 +55,8 @@ private:
 	SDL_Point mousePos = {0, 0};
 	Square *selectedSquare = nullptr;
 	Square *originalSquare = nullptr;
+    SDL_Rect promotionTable;
+    SDL_Texture *promotionTableTooltips = nullptr;
 };
 
 #endif

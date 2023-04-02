@@ -12,3 +12,5 @@ UkkoShakki
 # ignore metadata from valgrind
 vgcore.*
 callgrind.*
+
+**cmake-build-debug/

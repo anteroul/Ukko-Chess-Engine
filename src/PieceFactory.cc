@@ -9,13 +9,6 @@ PieceFactory::PieceFactory()
 		else
 			p[i] = Texture::load("../" + c[i]);
 	}
-	for (int i = 0; i < ARRSIZE(b); i++)
-	{
-		if (Texture::load(btn_src[i]))
-			b[i] = Texture::load(btn_src[i]);
-		else
-			b[i] = Texture::load("../" + c[i]);
-	}
 }
 
 PieceFactory::~PieceFactory()
@@ -26,7 +19,3 @@ PieceFactory::~PieceFactory()
 
 SDL_Texture *PieceFactory::getPiece(int n)
 { return p[n]; }
-
-SDL_Texture *PieceFactory::getButton(int n)
-{ return b[n]; }
-
