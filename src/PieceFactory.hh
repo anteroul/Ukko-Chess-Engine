@@ -19,10 +19,9 @@ class PieceFactory
 	private:
 		
 		// the textures
-		SDL_Texture* p[12]{};
-		SDL_Texture* b[8]{};
+		SDL_Texture* p[16]{};
 
-		std::string c[12] = 
+		std::string c[16] =
 		{
 			"Assets/bb.png",
 			"Assets/bh.png",
@@ -30,8 +29,12 @@ class PieceFactory
 			"Assets/bp.png",
 			"Assets/bq.png",
 			"Assets/br.png",
+            "Assets/wb.png",
+            "Assets/wh.png",
 			"Assets/wk.png",
             "Assets/wp.png",
+            "Assets/wq.png",
+            "Assets/wr.png",
             "Assets/bishop_btn.png",
             "Assets/knight_btn.png",
             "Assets/queen_btn.png",

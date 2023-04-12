@@ -55,8 +55,11 @@ private:
 	SDL_Point mousePos = {0, 0};
 	Square *selectedSquare = nullptr;
 	Square *originalSquare = nullptr;
+
+    // promotion table GUI
     SDL_Rect promotionTable;
     SDL_Texture *promotionTableTooltips = nullptr;
+    SDL_Texture* promotionButtons[4];
 };
 
 #endif

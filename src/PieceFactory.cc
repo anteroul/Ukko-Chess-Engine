@@ -14,7 +14,6 @@ PieceFactory::PieceFactory()
 PieceFactory::~PieceFactory()
 {
 	for (auto &i: p) SDL_DestroyTexture(i);
-	for (auto &i: b) SDL_DestroyTexture(i);
 }
 
 SDL_Texture *PieceFactory::getPiece(int n)
