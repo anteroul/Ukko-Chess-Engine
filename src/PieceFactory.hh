@@ -7,31 +7,30 @@
 #include "Board.hh"
 #include "Global.hh"
 
-class PieceFactory
-{
-	public:
-		PieceFactory();
-		~PieceFactory();
+class PieceFactory {
+public:
+    PieceFactory();
 
-		// get texture
-		SDL_Texture* getPiece(int n);
+    ~PieceFactory();
 
-	private:
-		
-		// the textures
-		SDL_Texture* p[16]{};
+    // get texture
+    SDL_Texture *getPiece(int n);
 
-		std::string c[16] =
-		{
-			"Assets/bb.png",
-			"Assets/bh.png",
-			"Assets/bk.png",
-			"Assets/bp.png",
-			"Assets/bq.png",
-			"Assets/br.png",
+private:
+
+    // the textures
+    SDL_Texture *p[16]{};
+
+    std::string c[16] = {
+            "Assets/bb.png",
+            "Assets/bh.png",
+            "Assets/bk.png",
+            "Assets/bp.png",
+            "Assets/bq.png",
+            "Assets/br.png",
             "Assets/wb.png",
             "Assets/wh.png",
-			"Assets/wk.png",
+            "Assets/wk.png",
             "Assets/wp.png",
             "Assets/wq.png",
             "Assets/wr.png",
@@ -39,7 +38,7 @@ class PieceFactory
             "Assets/knight_btn.png",
             "Assets/queen_btn.png",
             "Assets/rook_btn.png"
-        };
+    };
 };
 
 #endif
