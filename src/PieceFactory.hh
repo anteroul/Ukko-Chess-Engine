@@ -30,13 +30,13 @@ class PieceFactory
 			"Assets/bp.png",
 			"Assets/bq.png",
 			"Assets/br.png",
-			"Assets/wb.png",
-			"Assets/wh.png",
 			"Assets/wk.png",
-			"Assets/wp.png",
-			"Assets/wq.png",
-			"Assets/wr.png"
-		};
+            "Assets/wp.png",
+            "Assets/bishop_btn.png",
+            "Assets/knight_btn.png",
+            "Assets/queen_btn.png",
+            "Assets/rook_btn.png"
+        };
 };
 
 #endif
