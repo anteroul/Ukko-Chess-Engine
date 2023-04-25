@@ -18,8 +18,8 @@ Game::Game()
 	Pieces::init();
 
     // displays during pawn promotion
-    promotionTable = {Screen::getWidth() / 8, Screen::getHeight() / 5, (Screen::getWidth() / 4 * 3), Screen::getHeight() / 2};
-    promotionTableTooltips = Texture::load("../Assets/PromotionTable.png");
+    // promotionTable = {Screen::getWidth() / 8, Screen::getHeight() / 5, (Screen::getWidth() / 4 * 3), Screen::getHeight() / 2};
+    // promotionTableTooltips = Texture::load("../Assets/PromotionTable.png");
 
 	// white starts game
 	Settings::PlayerColor == WHITE ? Global::playerTurn = true : Global::playerTurn = false;
@@ -27,7 +27,7 @@ Game::Game()
 
 Game::~Game()
 {
-    SDL_DestroyTexture(promotionTableTooltips);
+    // SDL_DestroyTexture(promotionTableTooltips);
 	delete pieces;
 	delete board;
 	delete window;
@@ -158,6 +158,7 @@ void Game::render()
 	for (int i = 0; i < 32; i++)
 		PieceRenderer::renderInPosition(Pieces::get(i));
 
+    /*
 	// show GUI promotion table
 	if (Global::inPromotion)
 	{
@@ -167,6 +168,7 @@ void Game::render()
         SDL_RenderFillRect(Renderer::get(), &promotionTable);
         SDL_RenderCopy(Renderer::get(), promotionTableTooltips, nullptr, &promotionTable);
 	}
+    */
 
 	// main rendering
 	Renderer::render();

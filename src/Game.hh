@@ -57,9 +57,9 @@ private:
 	Square *originalSquare = nullptr;
 
     // promotion table GUI
-    SDL_Rect promotionTable;
-    SDL_Texture *promotionTableTooltips = nullptr;
-    SDL_Texture* promotionButtons[4];
+    // SDL_Rect promotionTable;
+    // SDL_Texture *promotionTableTooltips = nullptr;
+    // SDL_Texture* promotionButtons[4];
 };
 
 #endif
