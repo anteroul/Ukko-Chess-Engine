@@ -1,4 +1,4 @@
-# Ukko Chess Engine v0.4.1 alpha
+# Ukko Chess Engine v0.4.2 alpha
 
 #### Changes:
 - Removed engine class and moved second player functionality to game class
