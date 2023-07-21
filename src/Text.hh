@@ -14,6 +14,7 @@ class Text
 {
 public:
 	Text(std::string _text, bool playerTurn);
+    Text(std::string _text, float width, float height);
 	~Text();
 	void setText();
 	void render();
