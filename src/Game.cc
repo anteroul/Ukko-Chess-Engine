@@ -20,6 +20,7 @@ Game::Game()
     // displays during pawn promotion
     promotionTable = {Screen::getWidth() / 8, Screen::getHeight() / 5, (Screen::getWidth() / 4 * 3), Screen::getHeight() / 2};
     promotionTableTooltips = Texture::load("../Assets/Other/tooltips.png");
+    promotionTableTooltips = Texture::load("Assets/Other/tooltips.png");
 
 	// white starts game
 	Settings::PlayerColor == WHITE ? Global::playerTurn = true : Global::playerTurn = false;
