@@ -1,6 +1,5 @@
-# Ukko Chess Engine v0.4.2 alpha
+# Ukko Chess Engine v0.4.3 alpha
 
 #### Changes:
-- Removed engine class and moved second player functionality to game class
-- Moved pawn promotion to event handling to display GUI properly
-- GUI based pawn promotion
+- GUI based pawn promotion (temporary ugly solution but works for now)
+- Allocating the Game class on heap
