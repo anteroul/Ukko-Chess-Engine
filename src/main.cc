@@ -26,22 +26,23 @@ int main(int argc, char *argv[])
 		std::cout << "SDL_ttf could not initialize! " << TTF_GetError() << "\n";
 
 	// create new game
-	Game game;
+	Game* game = new Game;
 
 	// Game loop:
-	while (!game.ApplicationShouldClose)
+	while (!game->ApplicationShouldClose)
 	{
 		frameStart = SDL_GetTicks();
 
-		game.updateGame();
+		game->updateGame();
 
 		frameTime = SDL_GetTicks() - frameStart;
 
 		if (frameDelay > frameTime)
 			SDL_Delay(frameDelay - frameTime);
 	}
-
+	
 	// end the program
+	delete game;
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
