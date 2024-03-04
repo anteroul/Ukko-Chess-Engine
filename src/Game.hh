@@ -55,23 +55,7 @@ private:
 	SDL_Point mousePos = {0, 0};
 	Square *selectedSquare = nullptr;
 	Square *originalSquare = nullptr;
-    //-----------------
-    // promotion table GUI
-    SDL_Rect promotionTable;
-    SDL_Texture* promotionTableTooltips;
-    /*
-     * TODO: Promotion GUI buttons
-     SDL_Texture* promotionButtons[4] = {
-
-     };
-    */
-    Text tooltips[4] = {
-            Text("NUM1: QUEEN", 0.4f, 0.4f),
-            Text("NUM2: ROOK", 0.4f, 0.5f),
-            Text("NUM3: KNIGHT", 0.4f, 0.6f),
-            Text("NUM4: BISHOP", 0.4f, 0.7f),
-    };
-    //-----------------
+    PromotionTable* promotionTable = nullptr;
 };
 
 #endif

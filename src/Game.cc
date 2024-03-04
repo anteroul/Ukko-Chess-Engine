@@ -17,9 +17,8 @@ Game::Game()
 	// initialize pieces in their correct places
 	Pieces::init();
 
-    // displays during pawn promotion
-    promotionTable = {Screen::getWidth() / 8, Screen::getHeight() / 5, (Screen::getWidth() / 4 * 3), Screen::getHeight() / 2};
-    promotionTableTooltips = Texture::load("../Assets/Other/tooltips.png");
+    // initialize pawn promotion UI
+    promotionTable = new PromotionTable;
 
 	// white starts game
 	Settings::PlayerColor == WHITE ? Global::playerTurn = true : Global::playerTurn = false;
@@ -27,9 +26,7 @@ Game::Game()
 
 Game::~Game()
 {
-    // TODO: Fix segmentation fault when exiting program
-    Global::inPromotion = false;
-    SDL_DestroyTexture(promotionTableTooltips);
+    delete promotionTable;
 	delete pieces;
     delete board;
     delete window;
@@ -162,17 +159,17 @@ void Game::render()
 
 	if (Global::inPromotion)
 	{
-        promotionTable = {Screen::getWidth() / 8, Screen::getHeight() / 5, (Screen::getWidth() / 4 * 3), Screen::getHeight() / 2};
-        SDL_RenderDrawRect(Renderer::get(), &promotionTable);
+        promotionTable->promotionTable = {Screen::getWidth() / 8, Screen::getHeight() / 5, (Screen::getWidth() / 4 * 3), Screen::getHeight() / 2};
+        SDL_RenderDrawRect(Renderer::get(), &promotionTable->promotionTable);
         SDL_SetRenderDrawColor(Renderer::get(), 128, 128, 128, 255);
-        SDL_RenderFillRect(Renderer::get(), &promotionTable);
+        SDL_RenderFillRect(Renderer::get(), &promotionTable->promotionTable);
         // render tooltips
         /*
         for (auto & i : tooltips)
             i.render();
         */
         // band-aid solution:
-        SDL_RenderCopy(Renderer::get(), promotionTableTooltips, nullptr, &promotionTable);
+        SDL_RenderCopy(Renderer::get(), promotionTable->promotionTableTooltips, nullptr, &promotionTable->promotionTable);
     }
 
 	// main rendering
