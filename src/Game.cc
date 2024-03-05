@@ -26,10 +26,10 @@ Game::Game()
 
 Game::~Game()
 {
-    delete promotionTable;
+	delete promotionTable;
 	delete pieces;
-    delete board;
-    delete window;
+	delete board;
+	delete window;
 }
 
 void Game::updateGame()
@@ -159,17 +159,7 @@ void Game::render()
 
 	if (Global::inPromotion)
 	{
-        promotionTable->promotionTable = {Screen::getWidth() / 8, Screen::getHeight() / 5, (Screen::getWidth() / 4 * 3), Screen::getHeight() / 2};
-        SDL_RenderDrawRect(Renderer::get(), &promotionTable->promotionTable);
-        SDL_SetRenderDrawColor(Renderer::get(), 128, 128, 128, 255);
-        SDL_RenderFillRect(Renderer::get(), &promotionTable->promotionTable);
-        // render tooltips
-        /*
-        for (auto & i : tooltips)
-            i.render();
-        */
-        // band-aid solution:
-        SDL_RenderCopy(Renderer::get(), promotionTable->promotionTableTooltips, nullptr, &promotionTable->promotionTable);
+        promotionTable->render(Renderer::get());
     }
 
 	// main rendering

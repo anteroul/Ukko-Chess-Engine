@@ -9,6 +9,7 @@
 #include "Texture.hh"
 #include "Global.hh"
 #include <vector>
+#include <functional>
 
 class GUI
 {
@@ -21,7 +22,7 @@ struct PromotionTable : public GUI {
     PromotionTable()
     {
         // displays during pawn promotion
-        promotionTable = {Screen::getWidth() / 8, Screen::getHeight() / 5, (Screen::getWidth() / 4 * 3), Screen::getHeight() / 2};
+        tableCanvas = {Screen::getWidth() / 8, Screen::getHeight() / 5, (Screen::getWidth() / 4 * 3), Screen::getHeight() / 2};
         promotionTableTooltips = Texture::load("../Assets/Other/tooltips.png");
     }
 
@@ -31,8 +32,24 @@ struct PromotionTable : public GUI {
         SDL_DestroyTexture(promotionTableTooltips);
         delete[] &tooltips;
     }
+	
+	void render(std::function<auto(void)>& ren)
+	{
+		tableCanvas = {Screen::getWidth() / 8, Screen::getHeight() / 5, (Screen::getWidth() / 4 * 3), Screen::getHeight() / 2};
+		ren.setColor(128, 128, 128);
+		ren.fillRect(tableCanvas);
+		
+        // render tooltips
+        /*
+        for (auto & i : tooltips)
+            i.render();
+        */
+        // band-aid solution:
+		
+        SDL_RenderCopy(ren, promotionTableTooltips, nullptr, &tableCanvas);
+	}
 
-    SDL_Rect promotionTable{};
+    SDL_Rect tableCanvas{};
     SDL_Texture* promotionTableTooltips;
     /*
      * TODO: Promotion GUI buttons
