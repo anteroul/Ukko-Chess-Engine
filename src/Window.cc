@@ -1,6 +1,6 @@
 #include "Window.hh"
 
-Window::Window()
+Window::Window() : renderer(Renderer())
 {
 	// get monitor resolution
 	// SDL_DisplayMode mode;
@@ -22,15 +22,7 @@ Window::Window()
 		std::cout << "Could not create window! " << SDL_GetError() << "\n";
 	else
 	{
-		// create the renderer
-		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-		if (!renderer)
-			std::cout << "Could not create renderer! " << SDL_GetError() << "\n";
-		else
-		{
-			// set the renderer
-			Renderer::set(renderer);
-		}
+		renderer = Renderer(*window);
 	}
 }
 
@@ -57,9 +49,7 @@ void Window::setSizes() const
 
 Window::~Window()
 {
-	SDL_DestroyRenderer(renderer);
+	SDL_DestroyRenderer(renderer.renderer);
 	SDL_DestroyWindow(window);
-	window = nullptr;
-	renderer = nullptr;
 }
 

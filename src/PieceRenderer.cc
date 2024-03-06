@@ -9,7 +9,7 @@ void PieceRenderer::init(PieceFactory *factory)
 	_factory = factory;
 }
 
-void PieceRenderer::renderInPosition(Piece piece)
+void PieceRenderer::renderInPosition(Piece piece, Renderer& ren)
 {
 	int n = -1;
 
@@ -41,7 +41,7 @@ void PieceRenderer::renderInPosition(Piece piece)
 
 	// render the piece
 	if (n != -1)
-		SDL_RenderCopy(Renderer::get(), _factory->getPiece(n), nullptr, &Sqr::getSquare(piece.x, piece.y).rect);
+		SDL_RenderCopy(ren.renderer, _factory->getPiece(n), nullptr, &Sqr::getSquare(piece.x, piece.y).rect);
 }
 
 

@@ -2,9 +2,9 @@
 
 namespace Texture
 {
-	SDL_Texture* load(std::string path)
+	SDL_Texture* load(std::string path, Renderer& renderer)
 	{
-		Renderer::clear();		
+		renderer.clear();
 
 		// the actual texture
 		SDL_Texture* texture = nullptr;
@@ -19,7 +19,7 @@ namespace Texture
 			SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
 
 			// create texture from pixels
-			texture = SDL_CreateTextureFromSurface(Renderer::get(), loadedSurface);
+			texture = SDL_CreateTextureFromSurface(renderer.renderer, loadedSurface);
 
 			if(!texture)
 				std::cout << "Unable to create texture: " << path.c_str() << " " <<  SDL_GetError() << "\n";

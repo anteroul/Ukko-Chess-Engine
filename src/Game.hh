@@ -10,13 +10,13 @@
 #include "Settings.hh"
 #include "Square.hh"
 #include "SquareManager.hh"
-#include "Window.hh"
 #include "Pieces.hh"
 #include "Move.hh"
 #include "Global.hh"
 #include "Text.hh"
 #include "GameManager.hh"
 #include "Texture.hh"
+#include "Window.hh"
 #include <chrono>
 #include <thread>
 
@@ -50,12 +50,14 @@ private:
     //-----------------
 	Board *board = nullptr;
 	PieceFactory *pieces = nullptr;
-	Window *window = nullptr;
-	SDL_Event e{};
-	SDL_Point mousePos = {0, 0};
 	Square *selectedSquare = nullptr;
 	Square *originalSquare = nullptr;
+protected:
+	Window window;
+	SDL_Event e{};
+	SDL_Point mousePos{};
     PromotionTable* promotionTable = nullptr;
+	Renderer* renderer = nullptr;
 };
 
 #endif

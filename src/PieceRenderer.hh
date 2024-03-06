@@ -11,7 +11,7 @@
 namespace PieceRenderer
 {
 	void init(PieceFactory *factory);
-	void renderInPosition(Piece piece);
+	void renderInPosition(Piece piece, Renderer& ren);
 };
 
 #endif

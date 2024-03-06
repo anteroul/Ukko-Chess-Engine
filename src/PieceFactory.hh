@@ -9,15 +9,14 @@
 
 class PieceFactory {
 public:
-    PieceFactory();
-
+    PieceFactory(Renderer &ren);
     ~PieceFactory();
 
     // get texture
     SDL_Texture *getPiece(int n);
 
 private:
-
+	Renderer& ren;
     // the textures
     SDL_Texture *p[16]{};
 

@@ -1,13 +1,13 @@
 #include "PieceFactory.hh"
 
-PieceFactory::PieceFactory()
+PieceFactory::PieceFactory(Renderer& ren) : ren(ren)
 {
 	for (int i = 0; i < ARRSIZE(p); i++)
 	{
-		if (Texture::load(c[i]))
-			p[i] = Texture::load(c[i]);
+		if (Texture::load(c[i], ren))
+			p[i] = Texture::load(c[i], ren);
 		else
-			p[i] = Texture::load("../" + c[i]);
+			p[i] = Texture::load("../" + c[i], ren);
 	}
 }
 

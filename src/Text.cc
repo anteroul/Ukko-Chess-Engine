@@ -41,7 +41,7 @@ Text::~Text()
 void Text::setText()
 {
 	SDL_Surface* surf = TTF_RenderText_Blended(font, text.c_str(), color);
-	textTexture = SDL_CreateTextureFromSurface(Renderer::get(), surf);
+	textTexture = SDL_CreateTextureFromSurface(renderer.get(), surf);
 	SDL_FreeSurface(surf);
 	SDL_QueryTexture(textTexture, nullptr, nullptr, &position.w, &position.h);
 }
@@ -49,6 +49,6 @@ void Text::setText()
 void Text::render()
 {
 	position.x = Screen::getWidth() - Screen::getWidth() / 5;
-	SDL_RenderCopy(Renderer::get(), textTexture, nullptr, &position);
+	SDL_RenderCopy(renderer.get(), textTexture, nullptr, &position);
 }
 

@@ -1,15 +1,15 @@
 #include "Game.hh"
 
-Game::Game()
+Game::Game() : window(Window())
 {
-	// create new window and renderer
-	window = new Window;
+	// create renderer
+	renderer = window.getRenderer();
 
 	// make board
-	board = new Board;
+	board = new Board(window);
 
 	// create pieces
-	pieces = new PieceFactory;
+	pieces = new PieceFactory(*renderer);
 
 	// initialize helping namespace
 	PieceRenderer::init(pieces);
@@ -29,7 +29,6 @@ Game::~Game()
 	delete promotionTable;
 	delete pieces;
 	delete board;
-	delete window;
 }
 
 void Game::updateGame()
@@ -44,7 +43,7 @@ void Game::eventHandler()
 	while (SDL_PollEvent(&e))
 	{
 		// resize window
-		window->resize(e);
+		window.resize(e);
 
 		// close application
 		if ((e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) || e.type == SDL_QUIT)
@@ -113,12 +112,12 @@ void Game::update()
 void Game::render()
 {
 	// make gray background
-	Renderer::setColor(64, 64, 64);
-	Renderer::clear();
+	renderer->setColor(64, 64, 64);
+	renderer->clear();
 
 	// render console
-	for (auto & i : console)		if (i)
-			i->render();
+	for (auto & i : console)
+		if (i) i->render();
 
 	// render board
 	board->render();
@@ -126,8 +125,8 @@ void Game::render()
 	if (selectedSquare)
 	{
 		// color selected square
-		Renderer::setColor(0, 0, 255);
-		Renderer::fillRect(selectedSquare->rect);
+		renderer->setColor(0, 0, 255);
+		renderer->fillRect(selectedSquare->rect);
 	}
 
 	for(auto& legalMove : legalMoves)
@@ -135,8 +134,8 @@ void Game::render()
 		if(selectedSquare && isPieceSelected)
 		{
 			// color legal moves
-			Renderer::setColor(255, 0, 0);
-			Renderer::fillRect(legalMove.rect);
+			renderer->setColor(255, 0, 0);
+			renderer->fillRect(legalMove.rect);
 		}
 	}
 
@@ -147,23 +146,23 @@ void Game::render()
 			// color the square where the mouse is
 			if (GUI::onMouseRollOver(mousePos, Sqr::getSquare(i, j).rect))
 			{
-				Renderer::setColor(0, 255, 0);
-				Renderer::fillRect(Sqr::getSquare(i, j).rect);
+				renderer->setColor(0, 255, 0);
+				renderer->fillRect(Sqr::getSquare(i, j).rect);
 			}
 		}
 	}
 
 	// render pieces
 	for (int i = 0; i < 32; i++)
-		PieceRenderer::renderInPosition(Pieces::get(i));
+		PieceRenderer::renderInPosition(Pieces::get(i), reinterpret_cast<Renderer &>(renderer->renderer));
 
 	if (Global::inPromotion)
 	{
-        promotionTable->render(Renderer::get());
+        promotionTable->render(*renderer);
     }
 
 	// main rendering
-	Renderer::render();
+	renderer->render();
 }
 
 bool Game::moveSetup()

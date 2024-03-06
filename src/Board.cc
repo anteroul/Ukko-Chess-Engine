@@ -1,6 +1,9 @@
 #include "Board.hh"
 
-Board::Board() = default;
+Board::Board(Window &win)
+{
+	renderer = win.getRenderer();
+}
 
 void Board::makeBoard() const
 {
@@ -25,12 +28,11 @@ void Board::makeBoard() const
 			// different colors to every other square
 			if ((i % 2 == 0 && j % 2 != 0) || (i % 2 != 0 && j % 2 == 0))
 			{
-				Renderer::setColor(64, 48, 0);
-				Renderer::fillRect(Sqr::getSquare(i, j).rect);
-			} else
-			{
-				Renderer::setColor(128, 64, 0);
-				Renderer::fillRect(Sqr::getSquare(i, j).rect);
+				renderer->setColor(64, 48, 0);
+				renderer->fillRect(Sqr::getSquare(i, j).rect);
+			} else {
+				renderer->setColor(128, 64, 0);
+				renderer->fillRect(Sqr::getSquare(i, j).rect);
 			}
 		}
 	}

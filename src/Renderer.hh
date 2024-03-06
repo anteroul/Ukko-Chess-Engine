@@ -2,15 +2,19 @@
 #define RENDERER_HH
 
 #include <SDL2/SDL.h>
+#include <iostream>
 
-namespace Renderer
+class Renderer
 {
-	SDL_Renderer* get();
+public:
+	Renderer() = default;
+	explicit Renderer(SDL_Window& window);
 	void set(SDL_Renderer* _renderer);
-	void setColor(int r, int g, int b);
-	void clear();
-	void render();
-	void fillRect(SDL_Rect r);
-}
+	void setColor(int r, int g, int b) const;
+	void clear() const;
+	void render() const;
+	void fillRect(SDL_Rect r) const;
+	SDL_Renderer* renderer;
+};
 
 #endif

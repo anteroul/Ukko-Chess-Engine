@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 		std::cout << "SDL_ttf could not initialize! " << TTF_GetError() << "\n";
 
 	// create new game
-	Game* game = new Game;
+	Game* game = new Game();
 
 	// Game loop:
 	while (!game->ApplicationShouldClose)
