@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.21)
-project(UkkoShakki)
+project(cursed-chess)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BUILD_TYPE Debug) # debug mode
 find_package(SDL2 REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS})
-add_executable(UkkoShakki
+add_executable(cursed-chess
         src/main.cc
         src/Window.cc
         src/Renderer.cc
@@ -30,4 +30,4 @@ add_executable(UkkoShakki
         src/SquareCopy.cc
         )
 
-target_link_libraries(UkkoShakki ${SDL2_LIBRARIES} -lSDL2_image -lSDL2_ttf)
+target_link_libraries(cursed-chess ${SDL2_LIBRARIES} -lSDL2_image -lSDL2_ttf)

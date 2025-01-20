@@ -7,10 +7,16 @@ cmake_install.cmake
 Makefile
 
 # ignore executable
-UkkoShakki
+cursed-chess
 
 # ignore metadata from valgrind
 vgcore.*
 callgrind.*
 
+# ignore IDE generated files
+**.vscode/
+**.idea/
 **cmake-build-debug/
+
+# ignore shell.nix
+shell.nix
